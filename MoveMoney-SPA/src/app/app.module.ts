@@ -25,7 +25,6 @@ import {
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { CustomerNewComponent } from './customers/customer-new/customer-new.component';
 
-
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -37,13 +36,11 @@ import { CustomerNewComponent } from './customers/customer-new/customer-new.comp
     AppRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
-    })
+    }),
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    CustomerComponent,
-    CustomerNewComponent
 
   ],
   providers: [],

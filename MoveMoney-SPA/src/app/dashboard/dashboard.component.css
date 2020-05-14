@@ -1,14 +1,24 @@
 .button-design {
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow:    0 1px #444444;
-    width:         280px;
-    height:        115px;
+    width:         273px;
+    height:        105px;
     color:         #ffffff;
     display:       inline-block;
-    font:          normal bold 30px/125px "Open Sans", sans-serif;
-    text-align:    center;
+    font:          normal bold 25px/110px "Open Sans", sans-serif;
+    text-align:    left;
+    margin-top: 30px;
+    margin-left: 10px;
 }
 
+.button-design:hover{
+    opacity: 0.85;
+}
+
+.icon-design{
+    margin-left:10px;
+    margin-right: 40px;
+}
 .green{
     background:    #15d798;
 }

@@ -13,6 +13,8 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
+import { CustomerComponent } from 'app/customers/customer-list/customer-list.component';
+import { CustomerNewComponent } from 'app/customers/customer-new/customer-new.component';
 
 @NgModule({
   imports: [
@@ -32,6 +34,8 @@ import {MatSelectModule} from '@angular/material/select';
     UserProfileComponent,
     IconsComponent,
     NotificationsComponent,
+    CustomerComponent,
+    CustomerNewComponent
   ]
 })
 

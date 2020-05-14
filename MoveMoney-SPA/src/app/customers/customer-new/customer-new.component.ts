@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter  } from '@angular/core';
 
 @Component({
   selector: 'app-customer-new',
@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./customer-new.component.scss']
 })
 export class CustomerNewComponent implements OnInit {
+  
 
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

@@ -55,5 +55,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'icons', component: IconsComponent },
     { path: 'notifications', component: NotificationsComponent },
     { path: 'customers', component: CustomerComponent },
-    { path: 'customers/new', component: CustomerNewComponent}
+    { path: 'customers/new', component: CustomerNewComponent,}
 ];

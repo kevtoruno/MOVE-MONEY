@@ -9,11 +9,6 @@ import { CustomerNewComponent } from './customers/customer-new/customer-new.comp
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
-  },
-  {
-    path: '',
     component: AdminLayoutComponent,
     children: [{
       path: '',
