@@ -15,6 +15,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import { CustomerComponent } from 'app/customers/customer-list/customer-list.component';
 import { CustomerNewComponent } from 'app/customers/customer-new/customer-new.component';
+import { CustomerListResolver } from 'app/_resolvers/customer-list.resolver';
 
 @NgModule({
   imports: [
@@ -36,6 +37,9 @@ import { CustomerNewComponent } from 'app/customers/customer-new/customer-new.co
     NotificationsComponent,
     CustomerComponent,
     CustomerNewComponent
+  ],
+  providers: [
+    CustomerListResolver
   ]
 })
 

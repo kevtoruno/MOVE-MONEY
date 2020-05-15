@@ -6,6 +6,7 @@ import { IconsComponent } from '../../icons/icons.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { CustomerComponent } from 'app/customers/customer-list/customer-list.component';
 import { CustomerNewComponent } from 'app/customers/customer-new/customer-new.component';
+import { CustomerListResolver } from 'app/_resolvers/customer-list.resolver';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -50,10 +51,22 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
-    { path: '', component: DashboardComponent },
-    { path: 'users', component: UserProfileComponent },
-    { path: 'icons', component: IconsComponent },
-    { path: 'notifications', component: NotificationsComponent },
-    { path: 'customers', component: CustomerComponent },
-    { path: 'customers/new', component: CustomerNewComponent,}
+    {
+        path: '', component: DashboardComponent
+    },
+    {
+        path: 'users', component: UserProfileComponent
+    },
+    {
+        path: 'icons', component: IconsComponent
+    },
+    {
+        path: 'notifications', component: NotificationsComponent
+    },
+    {
+        path: 'customers', component: CustomerComponent,
+        resolve: { customers: CustomerListResolver }
+    },
+
+    { path: 'customers/new', component: CustomerNewComponent }
 ];

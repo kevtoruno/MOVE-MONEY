@@ -80,7 +80,7 @@ namespace MoveMoney.API.Migrations
                     Identification = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     PhoneNumber = table.Column<string>(nullable: true),
-                    DateOfBirth = table.Column<DateTime>(nullable: false),
+                    DateOfBirth = table.Column<DateTime>(nullable: true),
                     Country = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true)

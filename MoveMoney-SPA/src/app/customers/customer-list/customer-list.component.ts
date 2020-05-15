@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CustomerService } from 'app/_services/customer.service';
+import { Customer } from 'app/_models/Customer';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-customer',
@@ -6,10 +9,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./customer-list.component.scss']
 })
 export class CustomerComponent implements OnInit {
-
-  constructor() { }
+  customers: Customer[];
+  constructor(private customerService: CustomerService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.data.subscribe(data => {
+      this.customers = data.customers;
+    });
   }
 
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\movemoney.api\\MoveMoney.API.csproj": {}
+    "c:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\MoveMoney.API\\MoveMoney.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\movemoney.api\\MoveMoney.API.csproj": {
+    "c:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\MoveMoney.API\\MoveMoney.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\movemoney.api\\MoveMoney.API.csproj",
+        "projectUniqueName": "c:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\MoveMoney.API\\MoveMoney.API.csproj",
         "projectName": "MoveMoney.API",
-        "projectPath": "C:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\movemoney.api\\MoveMoney.API.csproj",
+        "projectPath": "c:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\MoveMoney.API\\MoveMoney.API.csproj",
         "packagesPath": "C:\\Users\\Keiktsu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\movemoney.api\\obj\\",
+        "outputPath": "c:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\MoveMoney.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -41,6 +41,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.4, )"

@@ -9,7 +9,7 @@ using MoveMoney.API.Data;
 namespace MoveMoney.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200513005640_InitialCreate")]
+    [Migration("20200515040412_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -179,7 +179,7 @@ namespace MoveMoney.API.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("DateOfBirth")
+                    b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
