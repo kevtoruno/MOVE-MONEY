@@ -1,0 +1,16 @@
+[
+    {
+        "id" : 1,
+        "countryName" : "Nicaragua"
+    },
+
+    {
+        "id" : 2,
+        "countryName" : "Costa Rica"
+    },
+    
+    {
+        "id" : 3,
+        "countryName" : "United States"
+    }
+]

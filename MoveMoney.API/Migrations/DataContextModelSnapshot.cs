@@ -25,6 +25,9 @@ namespace MoveMoney.API.Migrations
                     b.Property<string>("AgencyName")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("AgencyType")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("City")
                         .HasColumnType("TEXT");
 
@@ -283,7 +286,7 @@ namespace MoveMoney.API.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("DateOfBirth")
+                    b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
@@ -297,6 +300,12 @@ namespace MoveMoney.API.Migrations
 
                     b.Property<decimal>("Money")
                         .HasColumnType("TEXT");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("BLOB");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("BLOB");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("TEXT");

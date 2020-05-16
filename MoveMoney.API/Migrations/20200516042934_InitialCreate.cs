@@ -54,6 +54,7 @@ namespace MoveMoney.API.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     CountryId = table.Column<int>(nullable: false),
                     AgencyName = table.Column<string>(nullable: true),
+                    AgencyType = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     MoneyStored = table.Column<decimal>(nullable: false)
                 },
@@ -105,11 +106,13 @@ namespace MoveMoney.API.Migrations
                     AgencyId = table.Column<int>(nullable: false),
                     UserRoleId = table.Column<int>(nullable: false),
                     UserName = table.Column<string>(nullable: true),
+                    PasswordHash = table.Column<byte[]>(nullable: true),
+                    PasswordSalt = table.Column<byte[]>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     PhoneNumber = table.Column<string>(nullable: true),
-                    DateOfBirth = table.Column<DateTime>(nullable: false),
+                    DateOfBirth = table.Column<DateTime>(nullable: true),
                     IsActive = table.Column<bool>(nullable: false),
                     Money = table.Column<decimal>(nullable: false)
                 },

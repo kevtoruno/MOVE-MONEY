@@ -1,0 +1,36 @@
+[
+    {
+        "id": 1,
+        "agencyId": 1,
+        "userRoleId": 1,
+        "userName": "admin",
+        "firstName": "kevin",
+        "lastName": "admin",
+        "created" : "2020-05-15",
+        "isActive" : true,
+        "money" : 500
+    },
+    {
+        "id": 2,
+        "agencyId": 4,
+        "userRoleId": 1,
+        "userName": "admincr",
+        "firstName": "admincr",
+        "lastName": "admin",
+        "created" : "2020-05-15",
+        "isActive" : true,
+        "money" : 500
+    },
+    {
+        "id": 3,
+        "agencyId": 6,
+        "userRoleId": 1,
+        "userName": "adminmiami",
+        "firstName": "admin miami",
+        "lastName": "admin",
+        "created" : "2020-05-15",
+        "isActive" : true,
+        "money" : 500
+    }
+]
+

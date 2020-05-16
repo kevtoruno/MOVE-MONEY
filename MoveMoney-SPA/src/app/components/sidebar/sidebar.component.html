@@ -55,17 +55,62 @@
     </ul>
   </div>
     <ul class="nav">
-        <li [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
-            <a class="nav-link"  [routerLink]="[menuItem.path]">
-                <i class="material-icons">{{menuItem.icon}}</i>
-                <p>{{menuItem.title}}</p>
+
+        <li [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" class="nav-item">
+            <a class="nav-link"  [routerLink]="['']">
+                <i class="material-icons">dashboard</i>
+                <p>Dashboard</p>
             </a>
         </li>
+
+        <li [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" class="nav-item">
+            <a class="nav-link"  [routerLink]="['/customers']">
+                <i class="material-icons">people</i>
+                <p>Customers</p>
+            </a>
+        </li>
+
+        <li [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" class="nav-item">
+            <a class="nav-link"  [routerLink]="['/users']">
+                <i class="material-icons">person</i>
+                <p>Users</p>
+            </a>
+        </li>
+        
+        <li [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" class="nav-item">
+            <a class="nav-link"  [routerLink]="['/agency']">
+                <i class="material-icons">business</i>
+                <p>Agency</p>
+            </a>
+        </li>
+
+        <li [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" class="nav-item">
+            <a class="nav-link"  [routerLink]="['/agencies']">
+                <i class="material-icons">business</i>
+                <p>Agencies</p>
+            </a>
+        </li>
+
+        
+        <li [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" class="nav-item">
+            <a class="nav-link"  [routerLink]="['/orders']">
+                <i class="material-icons">receipt</i>
+                <p>Orders</p>
+            </a>
+        </li>
+        
         <li class="nav-item" style="cursor: pointer;">
             <a class="nav-link" (click)="logout()">
                 <i class="material-icons">input</i>
                 <p>Log out</p>
             </a>
         </li>
+
+        <!--<li [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+            <a class="nav-link"  [routerLink]="[menuItem.path]">
+                <i class="material-icons">{{menuItem.icon}}</i>
+                <p>{{menuItem.title}}</p>
+            </a>
+        </li>-->
     </ul>
 </div>
