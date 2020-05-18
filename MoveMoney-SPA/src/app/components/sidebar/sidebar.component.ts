@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertifyService } from 'app/_services/alertify.service';
+import { AuthService } from 'app/_services/auth.service';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -25,7 +26,7 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   menuItems: any[];
 
-  constructor(private alertify: AlertifyService) { }
+  constructor(private alertify: AlertifyService, private authService: AuthService, private router : Router) { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
@@ -39,7 +40,11 @@ export class SidebarComponent implements OnInit {
 
   logout() {
     this.alertify.confirm('Confirmation of log out', 'Are you sure that you want to log out?', () => {
-      console.log("logged out!");
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      this.authService.decodedToken = null;
+      this.authService.currentUser = null;
+      this.router.navigate(['login']);
     });
 
   }

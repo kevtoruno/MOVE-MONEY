@@ -1,8 +1,12 @@
-<div class="login">
-	<h2>MOVE MONEY</h2>
-    <form method="post">
-    	<input type="text" name="u" placeholder="Username" required="required" />
-        <input type="password" name="p" placeholder="Password" required="required" />
-        <button type="submit" class="btn btn-primary btn-block btn-large">Log in.</button>
-    </form>
-</div>
+<body >
+    <div class="login">
+        <h2>MOVE MONEY</h2>
+        <form #loginForm="ngForm" (ngSubmit)="login()">
+            <input type="text" name="userName" [(ngModel)]="model.userName" placeholder="Username" required="required" />
+            <input type="password" name="password" [(ngModel)]="model.password" placeholder="Password"
+                required="required" />
+            <button [disabled]="!loginForm.valid" type="submit" class="btn btn-primary btn-block btn-large">Login</button>
+        </form>
+    </div>
+</body>
+

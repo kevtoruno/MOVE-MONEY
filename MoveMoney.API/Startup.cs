@@ -12,10 +12,13 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Net;
 using Microsoft.AspNetCore.Http;
 using System.Diagnostics;
 using MoveMoney.API.Data;
+using AutoMapper;
+using Microsoft.IdentityModel.Tokens;
 
 namespace MoveMoney.API
 {
@@ -52,6 +55,20 @@ namespace MoveMoney.API
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
             services.AddScoped<IMoveMoneyRepository, MoveMoneyRepository>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddAutoMapper(typeof (MoveMoneyRepository).Assembly);
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
+                    .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

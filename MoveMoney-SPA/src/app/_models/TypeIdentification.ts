@@ -1,4 +1,4 @@
-export interface TypeIdentification{
+export interface TypeIdentification {
     id: number;
     nameIdentification: string;
 }
