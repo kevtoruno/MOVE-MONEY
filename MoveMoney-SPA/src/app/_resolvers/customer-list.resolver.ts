@@ -8,11 +8,13 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 
 export class CustomerListResolver implements Resolve<Customer[]>{
+    pageNumber = 1;
+    pageSize = 10;
 
     constructor(private customerService: CustomerService, private router: Router)  { }
 
     resolve(route: ActivatedRouteSnapshot): Observable<Customer[]> {
-        return this.customerService.getCustomers().pipe(
+        return this.customerService.getCustomers(this.pageNumber, this.pageSize).pipe(
             catchError(error => {
                 this.router.navigate(['']);
                 return of(null);

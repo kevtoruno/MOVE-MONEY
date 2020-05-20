@@ -5,7 +5,7 @@
         <div class="card">
 
           <div class="card-header card-header-info">
-            <h4 class="card-title ">Customers</h4>
+            <h4 class="card-title ">Users</h4>
           </div>
 
           <div class="card-body">
@@ -16,15 +16,17 @@
                     Names
                   </th>
                   <th>
-                    Country
+                    Agency
                   </th>
                   <th>
-                    City
+                    Role
                   </th>
                   <th>
-                    Address
+                    Is Active?
                   </th>
-
+                  <th>
+                    Money
+                  </th>
                   <th>
                     View
                   </th>
@@ -34,35 +36,35 @@
                 </thead>
                 <tbody>
                 
-                  <tr *ngFor="let customer of customers">
+                  <tr *ngFor="let user of users">
                       <td>
-                        {{customer.firstName + ' ' + customer.lastName}}
+                        {{user.firstName + ' ' + user.lastName}}
                       </td>
                       <td>
-                        {{customer.country}}
+                        {{user.agency}}
                       </td>
                       <td>
-                        {{customer.city}}
+                        {{user.userRole}}
+                      </td>
+                      <td *ngIf="user.isActive"> 
+                        Active
+                      </td>
+                      <td *ngIf="!user.isActive">
+                        Inactive
                       </td>
                       <td >
-                        {{customer.address}}
+                        ${{user.money}}
                       </td>
                       <td>
-                        <a [routerLink]="['/customers/'+customer.id]"><i class="material-icons">remove_red_eye</i></a>
+                        <a [routerLink]="['/users/'+user.id]"><i class="material-icons">remove_red_eye</i></a>
                       </td>
                       <td>
-                        <a [routerLink]="['/customers/edit/'+customer.id]"><i class="material-icons">edit</i></a>
+                        <a [routerLink]="['/users/edit/'+user.id]"><i class="material-icons">edit</i></a>
                       </td>
                 
                   </tr>
                 </tbody>
               </table>
-              <mat-paginator [length]="pagination.totalItems"
-               [pageSize]="pagination.itemsPerPage"
-               [pageSizeOptions]="pageSizeOptions"
-               (page)="pageChanged($event)"
-               >
-              </mat-paginator>
             </div>
           </div>
         </div>
@@ -74,8 +76,8 @@
             <h4 class="card-title text-center ">Actions</h4>
           </div>
           <div class="card-body mt-2 text-center">
-            <div [routerLink]="['/customers/new']">
-              <h2><i class="material-icons">person_add</i><a class="btn btn-link pl-2">New Customer</a></h2>
+            <div [routerLink]="['/users/new']">
+              <h2><i class="material-icons">person_add</i><a class="btn btn-link pl-2">New User</a></h2>
             </div>
           </div>
           

@@ -14,7 +14,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '', title: 'Dashboard', icon: 'dashboard', class: '' },
   { path: '/customers', title: 'Customers', icon: 'people', class: '' },
   { path: '/users', title: 'Users', icon: 'person', class: '' },
-  { path: '/agency', title: 'Agencies', icon: 'business', class: '' },
+  { path: '/agency', title: 'Agency', icon: 'business', class: '' },
   { path: '/orders', title: 'Orders', icon: 'receipt', class: '' },
 ];
 
@@ -26,7 +26,7 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   menuItems: any[];
 
-  constructor(private alertify: AlertifyService, private authService: AuthService, private router : Router) { }
+  constructor(private alertify: AlertifyService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);

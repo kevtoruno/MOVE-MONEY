@@ -3,6 +3,7 @@ using MoveMoney.API.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Collections.Generic;
+using MoveMoney.API.Helper;
 
 namespace MoveMoney.API.Data
 {
@@ -28,6 +29,8 @@ namespace MoveMoney.API.Data
         {
             return await _context.SaveChangesAsync() > 0;
         }
+
+        //Customer Functions
         public async Task<Customer> GetCustomer(int id)
         {
             var customer = await _context.Customers
@@ -37,13 +40,13 @@ namespace MoveMoney.API.Data
             return customer;
         }
 
-        public async Task<IEnumerable<Customer>> GetCustomers()
+        public async Task<PagedList<Customer>> GetCustomers(CustomerParams customerParams)
         {
-            var customer = await _context.Customers
+            var customers = _context.Customers
             .Include(i => i.TypeIdentification)
-            .ToListAsync();
+            .AsQueryable();
 
-            return customer;
+            return await PagedList<Customer>.CreateAsync(customers, customerParams.PageNumber, customerParams.PageSize);
         }
 
         public async Task<Customer> CreateCustomer(Customer customer)
@@ -60,6 +63,27 @@ namespace MoveMoney.API.Data
             else if(await _context.Customers.AnyAsync(c => c.Identification == Identification))
                 return "This Identification has been used already";
             return null;
+        }
+
+        //User functions
+        public async Task<IEnumerable<User>> GetUsers()
+        {
+            var users = await _context.Users
+            .Include(u => u.Agency)
+            .Include(u => u.UserRole)
+            .ToListAsync();
+
+            return users;
+        }
+
+        public async Task<User> GetUser(int id)
+        {
+            var user = await _context.Users
+            .Include(u => u.Agency)
+            .Include(u => u.UserRole)
+            .FirstOrDefaultAsync(u => u.Id == id);
+
+            return user;
         }
     }
 }

@@ -1,0 +1,106 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card card-header-success">
+            <h4 class="card-title card-design mb-1">Agency Name</h4>
+          </div>
+          <div class="card-body">
+            <p class="card-category card-design">Country</p>
+            <p class="card-category card-design">City</p>
+            <p class="card-category card-design">Total cash: $2,500.00</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card card-header-info">
+              <h4 class="card-title card-design mb-1">Agency logs</h4>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class=" text-primary">
+                    <th>
+                      Description
+                    </th>
+                    <th>
+                      Transaction Type
+                    </th>
+                    <th>
+                      Amount
+                    </th>
+                    <th>
+                      Date
+                    </th>
+                    <th>
+                      View details
+                    </th>
+                  </thead>
+                  <tbody>
+                  
+                    <tr>
+                        <td>
+                          Order 66 was collected by customer
+                        </td>
+                        <td>
+                          Collect
+                        </td>
+                        <td style="color:red;">
+                          -600
+                        </td>
+                        <td > 
+                          05/19/2020
+                        </td>
+                        <td>
+                          <a [routerLink]="['/users/']"><i class="material-icons">remove_red_eye</i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Order 55 was transferred by customer
+                      </td>
+                      <td>
+                        Transfer
+                      </td>
+                      <td style="color:green;">
+                        +1500
+                      </td>
+                      <td > 
+                        05/19/2020
+                      </td>
+                      <td>
+                        <a [routerLink]="['/users/']"><i class="material-icons">remove_red_eye</i></a>
+                      </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Manager1 pushed money to Agent1
+                    </td>
+                    <td>
+                      Push
+                    </td>
+                    <td>
+                      650
+                    </td>
+                    <td > 
+                      05/19/2020
+                    </td>
+                    <td>
+                      <a [routerLink]="['/users/']"><i class="material-icons">remove_red_eye</i></a>
+                    </td>
+                </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>

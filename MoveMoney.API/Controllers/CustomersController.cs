@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
 using MoveMoney.API.Models;
+using MoveMoney.API.Helper;
 using MoveMoney.API.Data;
 using System.Collections.Generic;
 
@@ -17,11 +18,13 @@ namespace MoveMoney.API.Controllers
             this._repo = repo;
         }
         [HttpGet]
-        public async Task<IActionResult> GetCustomers()
+        public async Task<IActionResult> GetCustomers([FromQuery]CustomerParams customerParams)
         {
-            var getCustomers = await _repo.GetCustomers();
+            var customers = await _repo.GetCustomers(customerParams);
+            
+            Response.AddPagination(customers.CurrentPage, customers.PageSize, customers.TotalCount, customers.TotalPages);
 
-            return Ok(getCustomers);
+            return Ok(customers);
         }
 
         [HttpGet("{id}", Name = "GetCustomer")]
