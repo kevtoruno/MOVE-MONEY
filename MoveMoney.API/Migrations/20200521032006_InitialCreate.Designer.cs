@@ -9,8 +9,8 @@ using MoveMoney.API.Data;
 namespace MoveMoney.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200520201649_addedComission")]
-    partial class addedComission
+    [Migration("20200521032006_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -159,14 +159,8 @@ namespace MoveMoney.API.Migrations
                     b.Property<int>("CountryReceiverId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("CountryReceiverName")
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("CountrySenderId")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("CountrySenderName")
-                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -183,10 +177,7 @@ namespace MoveMoney.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ComissionId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ComissionMaster")
+                    b.Property<int>("ComissionId")
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("MaxAmount")
@@ -506,7 +497,9 @@ namespace MoveMoney.API.Migrations
                 {
                     b.HasOne("MoveMoney.API.Models.Comission", "Comission")
                         .WithMany()
-                        .HasForeignKey("ComissionId");
+                        .HasForeignKey("ComissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MoveMoney.API.Models.Customer", b =>

@@ -157,14 +157,8 @@ namespace MoveMoney.API.Migrations
                     b.Property<int>("CountryReceiverId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("CountryReceiverName")
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("CountrySenderId")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("CountrySenderName")
-                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -181,10 +175,7 @@ namespace MoveMoney.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ComissionId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ComissionMaster")
+                    b.Property<int>("ComissionId")
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("MaxAmount")
@@ -504,7 +495,9 @@ namespace MoveMoney.API.Migrations
                 {
                     b.HasOne("MoveMoney.API.Models.Comission", "Comission")
                         .WithMany()
-                        .HasForeignKey("ComissionId");
+                        .HasForeignKey("ComissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MoveMoney.API.Models.Customer", b =>

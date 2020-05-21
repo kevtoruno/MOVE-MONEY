@@ -7,7 +7,5 @@ namespace MoveMoney.API.Models
         public int CountrySenderId { get; set; }
         public Country CountryReceiver { get; set; }
         public int CountryReceiverId { get; set; }
-        public string CountrySenderName { get; set; }
-        public string CountryReceiverName { get; set; }
     }
 }

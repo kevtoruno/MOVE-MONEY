@@ -4,7 +4,7 @@ namespace MoveMoney.API.Models
     {
         public int Id { get; set; }
         public Comission Comission { get; set; }
-        public int ComissionMaster { get; set; }
+        public int ComissionId { get; set; }
         public decimal MinAmount { get; set; }
         public decimal MaxAmount { get; set; }
         public double Percentage { get; set; }

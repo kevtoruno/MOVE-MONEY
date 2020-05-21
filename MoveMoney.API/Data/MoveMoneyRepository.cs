@@ -85,5 +85,16 @@ namespace MoveMoney.API.Data
 
             return user;
         }
+
+        public async Task<double> GetComissionValue(decimal amount, int senderCountryId, int receiverCountryId)
+        {
+            var comission = await _context.Comissions.FirstOrDefaultAsync(c => c.CountryReceiverId == receiverCountryId && c.CountrySenderId == senderCountryId);
+        
+            var comissionRange = await _context.ComissionRanges
+            .FirstOrDefaultAsync(c => c.ComissionId == comission.Id /*&& c.MinAmount <= amount*/);
+
+            
+            return comissionRange.Percentage;
+        }
     }
 }

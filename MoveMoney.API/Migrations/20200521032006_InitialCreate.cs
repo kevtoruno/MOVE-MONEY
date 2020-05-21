@@ -70,6 +70,32 @@ namespace MoveMoney.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Comissions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CountrySenderId = table.Column<int>(nullable: false),
+                    CountryReceiverId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comissions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comissions_Countries_CountryReceiverId",
+                        column: x => x.CountryReceiverId,
+                        principalTable: "Countries",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Comissions_Countries_CountrySenderId",
+                        column: x => x.CountrySenderId,
+                        principalTable: "Countries",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
                 {
@@ -129,6 +155,28 @@ namespace MoveMoney.API.Migrations
                         name: "FK_Users_UserRoles_UserRoleId",
                         column: x => x.UserRoleId,
                         principalTable: "UserRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ComissionRanges",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ComissionId = table.Column<int>(nullable: false),
+                    MinAmount = table.Column<decimal>(nullable: false),
+                    MaxAmount = table.Column<decimal>(nullable: false),
+                    Percentage = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ComissionRanges", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ComissionRanges_Comissions_ComissionId",
+                        column: x => x.ComissionId,
+                        principalTable: "Comissions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -360,6 +408,21 @@ namespace MoveMoney.API.Migrations
                 column: "ClosingCashMasterId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ComissionRanges_ComissionId",
+                table: "ComissionRanges",
+                column: "ComissionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comissions_CountryReceiverId",
+                table: "Comissions",
+                column: "CountryReceiverId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comissions_CountrySenderId",
+                table: "Comissions",
+                column: "CountrySenderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Customers_TypeIdentificationID",
                 table: "Customers",
                 column: "TypeIdentificationID");
@@ -409,6 +472,9 @@ namespace MoveMoney.API.Migrations
                 name: "ClosingCashManangerDetails");
 
             migrationBuilder.DropTable(
+                name: "ComissionRanges");
+
+            migrationBuilder.DropTable(
                 name: "UserLogs");
 
             migrationBuilder.DropTable(
@@ -419,6 +485,9 @@ namespace MoveMoney.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "ClosingCashManagers");
+
+            migrationBuilder.DropTable(
+                name: "Comissions");
 
             migrationBuilder.DropTable(
                 name: "Customers");

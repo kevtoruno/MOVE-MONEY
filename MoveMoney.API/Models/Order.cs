@@ -3,7 +3,7 @@ using System;
 namespace MoveMoney.API.Models
 {
     public class Order
-    {
+    {   
         public int Id { get; set; }
         public Customer Sender { get; set; }
         public int SenderId { get; set; }
@@ -22,5 +22,11 @@ namespace MoveMoney.API.Models
         public decimal Amount { get; set; }
         public decimal Taxes { get; set; }
         public decimal Total { get; set; }
+
+        public Order()
+        {
+            Created = DateTime.Now;
+            IsClosed = false;
+        }
     }
 }

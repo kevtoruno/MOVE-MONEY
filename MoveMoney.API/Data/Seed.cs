@@ -86,6 +86,38 @@ namespace MoveMoney.API.Data
                 context.SaveChanges();
             }
         }
+        public static void SeedComission(DataContext context)
+        {
+            if(!context.Comissions.Any())
+            {
+                var comissionData = System.IO.File.ReadAllText("SeedData/ComissionSeedData.json");
+                var comissions = JsonConvert.DeserializeObject<Comission[]>(comissionData);
+
+                foreach (var comission in comissions)
+                {
+                    context.Add(comission);
+                }
+
+                context.SaveChanges();
+            }
+        }
+
+        public static void SeedComissionRanges(DataContext context)
+        {
+            if(!context.ComissionRanges.Any())
+            {
+                var comissionRangesData = System.IO.File.ReadAllText("SeedData/ComissionRangesSeedData.json");
+                var comissionsRanges = JsonConvert.DeserializeObject<ComissionRange[]>(comissionRangesData);
+
+                foreach (var comissionRange in comissionsRanges)
+                {
+                    context.Add(comissionRange);
+                }
+
+                context.SaveChanges();
+            }
+        }
+
         public static void SeedUser(DataContext context)
         {
             if(!context.Users.Any())

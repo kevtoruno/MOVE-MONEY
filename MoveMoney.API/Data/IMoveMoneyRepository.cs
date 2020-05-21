@@ -21,5 +21,8 @@ namespace MoveMoney.API.Data
         Task<IEnumerable<User>> GetUsers();
         Task<User> GetUser(int id);
 
+        //Order functions
+        Task<double> GetComissionValue(decimal amount, int senderCountry, int receiverCountry);
+
     }
 }

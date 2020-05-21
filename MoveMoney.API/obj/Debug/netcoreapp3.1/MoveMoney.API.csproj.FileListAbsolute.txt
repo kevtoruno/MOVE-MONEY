@@ -92,3 +92,5 @@ C:\Users\Keiktsu\source\Projects\Sistemas\MOVE MONEY\source\movemoney.api\bin\De
 C:\Users\Keiktsu\source\Projects\Sistemas\MOVE MONEY\source\movemoney.api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\Keiktsu\source\Projects\Sistemas\MOVE MONEY\source\movemoney.api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 C:\Users\Keiktsu\source\Projects\Sistemas\MOVE MONEY\source\movemoney.api\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Keiktsu\source\Projects\Sistemas\MOVE MONEY\source\movemoney.api\bin\Debug\netcoreapp3.1\SeedData\ComissionSeedData.json
+C:\Users\Keiktsu\source\Projects\Sistemas\MOVE MONEY\source\movemoney.api\bin\Debug\netcoreapp3.1\SeedData\ComissionRangesSeedData.json

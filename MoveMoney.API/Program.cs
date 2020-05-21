@@ -33,6 +33,8 @@ namespace MoveMoney.API
                     Seed.SeedAgency(context);
                     Seed.SeedCustomers(context);
                     Seed.SeedUser(context);
+                    Seed.SeedComission(context);
+                    Seed.SeedComissionRanges(context);
                 }
                 catch (Exception ex)
                 {
