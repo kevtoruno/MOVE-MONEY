@@ -17,6 +17,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRippleModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 import { MatSelectModule } from '@angular/material/select';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
@@ -36,6 +38,7 @@ import { PaginatorOptions } from './_helpers/PaginatorOptions';
     MatFormFieldModule,
     MatCardModule,
     MatInputModule,
+    MatGridListModule,
     MatSelectModule,
     MatTooltipModule,
     BrowserAnimationsModule,

@@ -9,6 +9,7 @@ import { CustomerListResolver } from 'app/_resolvers/customer-list.resolver';
 import { UserListComponent } from 'app/users/user-list/user-list.component';
 import { UserListResolver } from 'app/_resolvers/user-list.resolver';
 import { AgencyDetailComponent } from 'app/Agencies/Agency-detail/Agency-detail.component';
+import { OrderNewComponent } from 'app/orders/order-new/order-new.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -72,6 +73,9 @@ export const AdminLayoutRoutes: Routes = [
     },
     {
         path: 'agency', component: AgencyDetailComponent
+    },
+    {
+        path: 'orders/new', component: OrderNewComponent
     },
 
     { path: 'customers/new', component: CustomerNewComponent }

@@ -20,5 +20,6 @@ namespace MoveMoney.API.Data
         //User functions
         Task<IEnumerable<User>> GetUsers();
         Task<User> GetUser(int id);
+
     }
 }

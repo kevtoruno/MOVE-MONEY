@@ -1,0 +1,91 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+
+          <div class="card-header card-header-info">
+            <h4 class="card-title">New Order</h4>
+            <p class="card-category">Input all of the necessary information</p>
+          </div>
+
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col-md-4 form-group">
+                  <mat-form-field class="example-full-width">
+                    <input type="text"  placeholder="Sender" aria-label="Number" matInput [formControl]="myControl"
+                      [matAutocomplete]="auto">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4 form-group">
+                  <mat-form-field class="">
+                    <input type="text" placeholder="Receiver" aria-label="Number" matInput [formControl]="myControl"
+                      [matAutocomplete]="auto2">
+                    <mat-autocomplete  #auto2="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptions2 | async" [value]="option">
+                        {{option}}
+
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4 form-group">
+                  <mat-form-field class="">
+                    <input type="text" placeholder="Agency Destination" aria-label="Number" matInput
+                      [formControl]="myControl" [matAutocomplete]="auto">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-3 form-group">
+                      <mat-form-field appearance="">
+                        <input matInput type="number" placeholder="Amount to transfer">
+                      </mat-form-field>
+                      <button mat-stroked-button class="btn btn-raised">Calculate</button>
+                      <mat-label class="ml-3">
+                        $ Calculated Amount
+                      </mat-label>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-md-4 form-group">
+                  <mat-radio-group aria-label="Select an option">
+                    <mat-radio-button class="mr-4" value="1">Pick up at Agency</mat-radio-button>
+                    <mat-radio-button value="2">Delivery</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+
+              <button mat-raised-button type="submit" class="btn btn-info pull-right">Next</button>
+              <div class="clearfix"></div>
+            </form>
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -13,6 +13,8 @@ namespace MoveMoney.API.Data
         public DbSet<ClosingCashManangerDetail> ClosingCashManangerDetails { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Comission> Comissions { get; set; }
+        public DbSet<ComissionRange> ComissionRanges { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<TypeIdentification> TypeIdentifications { get; set; }
         public DbSet<User> Users { get; set; }
