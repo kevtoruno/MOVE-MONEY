@@ -21,8 +21,12 @@ namespace MoveMoney.API.Data
         Task<IEnumerable<User>> GetUsers();
         Task<User> GetUser(int id);
 
+        //Agency functions
+
+        Task<Agency> GetAgency(int id);
+
         //Order functions
         Task<double> GetComissionValue(double amount, int senderCountry, int receiverCountry);
-
+        
     }
 }

@@ -9,10 +9,12 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Security.Claims;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MoveMoney.API.Controllers
 {
     [Route("api/orders")]
+    [Authorize]
     [ApiController]
     public class OrdersController : ControllerBase
     {
@@ -27,10 +29,10 @@ namespace MoveMoney.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateOrder(OrderForCreateDto orderForCreateDto)
         {
-            /*if (orderForCreateDto.UserId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized();*/
-
-            //Console.WriteLine("Value" + int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value));
+            if (orderForCreateDto.UserId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized("You are not loggedin");
+            }           
 
             var user = await _repo.GetUser(orderForCreateDto.UserId);
 
@@ -50,15 +52,24 @@ namespace MoveMoney.API.Controllers
             order.Taxes = order.Amount * 0.10;
             order.Total = order.Amount + order.Taxes + order.Comission;
             _repo.Add(order);
-            
+
+            var sender = await _repo.GetCustomer(order.SenderId);
+            var recipient = await _repo.GetCustomer(order.RecipientId);
+            var agency = await _repo.GetAgency(order.AgencyDestinationId);
             if (await _repo.SaveAll())
             {
                 var orderForReturn = _mapper.Map<OrderForReturnDto>(order);
+
+                orderForReturn.SenderName = sender.FirstName + " " + sender.LastName;
+                orderForReturn.ReceiverName = recipient.FirstName + " " + recipient.LastName;
+                orderForReturn.UserName = user.FirstName + " " + user.LastName;
+                orderForReturn.AgencyDestinationName = agency.AgencyName;
+
                 return CreatedAtRoute(null, orderForReturn);
             }
             return BadRequest("Transaction failed.");
         }
-        
+
         [HttpGet("comission")]
         public async Task<IActionResult> GetComission(ComissionToGetDto comissionToGetDto)
         {

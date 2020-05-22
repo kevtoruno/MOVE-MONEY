@@ -99,5 +99,13 @@ namespace MoveMoney.API.Data
 
             return comissionRange.Percentage;
         }
+
+        public async Task<Agency> GetAgency(int id)
+        {
+            var agency = await _context.Agency
+            .FirstOrDefaultAsync(a => a.Id == id);
+
+            return agency;
+        }
     }
 }

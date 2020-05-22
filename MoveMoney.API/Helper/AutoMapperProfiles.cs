@@ -15,11 +15,13 @@ namespace MoveMoney.API.Helper
                     opt => opt.MapFrom(src => src.Agency.AgencyName))
                 .ForMember(dest => dest.UserRole, 
                     opt => opt.MapFrom(src => src.UserRole.RoleName));
+            
+            CreateMap<OrderForCreateDto, Order>();
 
             CreateMap<User, UserForRegisterDto>();
-            CreateMap<UserForRegisterDto, User>();
-            CreateMap<OrderForCreateDto, Order>();
+            CreateMap<UserForRegisterDto, User>();    
             CreateMap<Order, OrderForReturnDto>();
+            
             //CreateMap<>
         }
     }

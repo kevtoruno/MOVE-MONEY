@@ -23,12 +23,23 @@
     height: 12px;
     display: block;
   }
-  
+  .label-design{
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 18px;
+    text-align: left !important;
+  }
+  .label-design-detail{
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 18px;
+    color: rgb(54, 54, 54);
+  }
  .centerForm{
   margin: 0 auto;
   width: 60% !important;
  }
-  
+.centerContent{
+    text-align: center;
+}
   /* Hosted Payment Fields styles*/
   
   .hosted-field-focus { 

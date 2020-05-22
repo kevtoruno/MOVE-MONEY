@@ -2,70 +2,100 @@
   <div class="container-fluid">
     <div class="row centerForm">
       <div class="col-md-12">
-  
-        <div class="card" style="background-color: rgb(240, 248, 206);">
-    
+
+        <div class="card centerContent">
+
           <div class="card-header card-header-info">
-            <h4 class="card-title">Order resume</h4>
+            <h4 class="card-title">Order invoice</h4>
             <p class="card-category">Confirm the processing of the order</p>
           </div>
-            <div class="row">
-              <div class="panel panel-primary">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Credit Card Payment</h3>
-                </div>
-                <form class="panel-body">
-                  <div class="row">
-      
-                    <div class="form-group">
-                      <label for="cardholder-name">Cardholder Name</label>
-                      <input type="text" class="form-control" id="cardholder-name">
-                      <span class="helper-text"></span>
-                    </div>
-                    <!--Hosted Payment Field for CC number-->
-                    <div class="form-group ">
-                      <label for="card-number">Card Number</label>
-                      <div class="input-group">
-                        <div class="form-control" id="card-number" data-bluesnap="ccn"></div>
-                        <div id="card-logo" class="input-group-addon"><img
-                            src="https://files.readme.io/d1a25b4-generic-card.png" height="20px"></div>
-                      </div>
-                      <span class="helper-text" id="card-help"></span>
-                    </div>
-                    <!--Hosted Payment Field for CC CVV-->
-                    <div class="form-group ">
-                      <label for="cvv">CVV</label>
-                      <div class="form-control" id="cvv" data-bluesnap="cvv"></div>
-                      <span class="helper-text" id="cvv-help"></span>
-                    </div>
-      
-                    <!--Hosted Payment Field for CC EXP-->
-                    <div class="form-group ">
-                      <label for="exp-date">Exp. (mm/yyyy)</label>
-                      <div class="form-control" id="exp-date" data-bluesnap="exp"></div>
-                      <span class="helper-text" id="exp-help"></span>
-                    </div>
-                    <div class="form-group ">
-                      <label for="cardholder-name">Postal Code</label>
-                      <input type="text" class="form-control" id="cardholder-name">
-                      <span class="helper-text"></span>
-                    </div>
+          <div class="row">
+            <div class="panel panel-primary">
+              <form class="panel-body">
+                <div class="row mt-5">
+                  <div class="col-md-12">
+                    <label class ="label-design">Sender:</label>
+                    <label class ="label-design-detail ml-2">Juansito en Piedra</label>
                   </div>
-      
-                  <button class="btn btn-raised btn-info btn-lg col-md-4" type="submit" id="submit-button">Pay
-                    Now</button>
-      
-                </form>
-      
-              </div>
+                </div>
+                <div class="row mt-4">
+                  <div class="col-md-12">
+                    <label class ="label-design">Receiver:</label>
+                    <label class ="label-design-detail ml-2">Juansito en Crack</label>
+                  </div>
+                </div>
+
+                <div class="row mt-4">
+                  <div class="col-md-12">
+                    <label class ="label-design">Agency Destination:</label>
+                    <label class ="label-design-detail ml-2">Miami HQ</label>
+                  </div>
+                </div>
+                
+                <div class="row mt-4">
+                  <div class="col-md-12">
+                    <label class ="label-design">Amount:</label>
+                    <label class ="label-design-detail ml-2">$1000.00</label>
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <div class="col-md-12">
+                    <label class ="label-design">Comission:</label>
+                    <label class ="label-design-detail ml-2">$40</label>
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <div class="col-md-12">
+                    <label class ="label-design">Taxes:</label>
+                    <label class ="label-design-detail ml-2">$100</label>
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <div class="col-md-12">
+                    <label class ="label-design">Subtotal:</label>
+                    <label class ="label-design-detail ml-2">$1140</label>
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <div class="col-md-12">
+                    <label class ="label-design">Total:</label>
+                    <label class ="label-design-detail ml-2">$1200</label>
+                  </div>
+                </div>
+                <button class="btn btn-raised btn-info btn-lg col-md-4" type="submit" id="submit-button">Pay
+                  Now</button>
+              </form>
             </div>
           </div>
+        </div>
       </div>
 
     </div>
 
-
-   
   </div>
 </div>
-
+<!--
+<div class="form-group ">
+  <label for="card-number">Card Number</label>
+  <div class="input-group">
+    <div class="form-control" id="card-number" data-bluesnap="ccn"></div>
+    <div id="card-logo" class="input-group-addon"><img
+        src="https://files.readme.io/d1a25b4-generic-card.png" height="20px"></div>
+  </div>
+  <span class="helper-text" id="card-help"></span>
+</div>
+<div class="form-group ">
+  <label for="cvv">CVV</label>
+  <div class="form-control" id="cvv" data-bluesnap="cvv"></div>
+  <span class="helper-text" id="cvv-help"></span>
+</div>
+<div class="form-group ">
+  <label for="exp-date">Exp. (mm/yyyy)</label>
+  <div class="form-control" id="exp-date" data-bluesnap="exp"></div>
+  <span class="helper-text" id="exp-help"></span>
+</div>
+<div class="form-group ">
+  <label for="cardholder-name">Postal Code</label>
+  <input type="text" class="form-control" id="cardholder-name">
+  <span class="helper-text"></span>
+</div>-->

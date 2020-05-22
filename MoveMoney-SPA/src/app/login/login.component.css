@@ -35,7 +35,7 @@
 
 html { width: 100%; height:100%; overflow:hidden;  }
 
-::ng-deep html, body, app-route, app-login, body, .body-design { 
+::ng-deep html, body, app-route, app-login, body { 
 	width: 100%;
 	height:100% !important;
 	background: #f7faff !important;

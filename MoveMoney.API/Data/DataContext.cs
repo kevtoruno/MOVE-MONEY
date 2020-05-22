@@ -21,7 +21,6 @@ namespace MoveMoney.API.Data
         public DbSet<Comission> Comissions { get; set; }
         public DbSet<ComissionRange> ComissionRanges { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<ClosingCashAgent>() //Setting Up 1 to 1 relationship
