@@ -24,6 +24,10 @@
     display: block;
   }
   
+ .centerForm{
+  margin: 0 auto;
+  width: 60% !important;
+ }
   
   /* Hosted Payment Fields styles*/
   

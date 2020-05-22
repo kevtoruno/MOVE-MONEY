@@ -1,7 +1,7 @@
-<div class="main-content">
+<div *ngIf="!value" class="main-content">
   <div class="container-fluid">
     <div class="row">
-      <div *ngIf="!value" class="col-md-12">
+      <div  class="col-md-12">
         <div class="card">
 
           <div class="card-header card-header-info">
@@ -86,8 +86,9 @@
 
         </div>
       </div>
-
-      <app-order-resume *ngIf="value"></app-order-resume>
+      
     </div>
   </div>
 </div>
+
+<app-order-resume *ngIf="value"></app-order-resume>
