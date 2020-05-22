@@ -19,6 +19,7 @@ namespace MoveMoney.API.Helper
             CreateMap<User, UserForRegisterDto>();
             CreateMap<UserForRegisterDto, User>();
             CreateMap<OrderForCreateDto, Order>();
+            CreateMap<Order, OrderForReturnDto>();
             //CreateMap<>
         }
     }

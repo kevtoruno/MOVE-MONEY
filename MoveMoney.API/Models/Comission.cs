@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace MoveMoney.API.Models
 {
     public class Comission
@@ -7,5 +9,6 @@ namespace MoveMoney.API.Models
         public int CountrySenderId { get; set; }
         public Country CountryReceiver { get; set; }
         public int CountryReceiverId { get; set; }
+        public ICollection<ComissionRange> ComissionRange { get; set; }
     }
 }

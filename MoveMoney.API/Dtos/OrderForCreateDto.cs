@@ -10,7 +10,7 @@ namespace MoveMoney.API.Dtos
         public int RecipientId { get; set; }
         public int AgencyDestinationId { get; set; }
         public string DeliveryType { get; set; }
-        public decimal Amount { get; set; }
-        public decimal Comission { get; set; }
+        public double Amount { get; set; }
+        public double Comission { get; set; } //+ amount + comission
     }
 }

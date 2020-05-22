@@ -5,6 +5,7 @@ using MoveMoney.API.Models;
 using MoveMoney.API.Helper;
 using MoveMoney.API.Dtos;
 using MoveMoney.API.Data;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Security.Claims;
 using AutoMapper;
@@ -23,11 +24,13 @@ namespace MoveMoney.API.Controllers
             _repo = repo;
         }
 
-        /*[HttpPost]
+        [HttpPost]
         public async Task<IActionResult> CreateOrder(OrderForCreateDto orderForCreateDto)
         {
-            if (orderForCreateDto.UserId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized();
+            /*if (orderForCreateDto.UserId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();*/
+
+            //Console.WriteLine("Value" + int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value));
 
             var user = await _repo.GetUser(orderForCreateDto.UserId);
 
@@ -40,31 +43,30 @@ namespace MoveMoney.API.Controllers
             if (orderForCreateDto.Amount <= 0)
                 return BadRequest("Amount must be higher than 0.");
 
-            //
+            var order = _mapper.Map<Order>(orderForCreateDto);
 
-            var orderToReturn = _mapper.Map<Order>(orderForCreateDto);
-
-            orderToReturn.Comission = orderToReturn.Amount * Convert.ToDecimal(comission);
-            orderToReturn.Status = "Processing";
-            orderToReturn.Taxes = orderToReturn.Amount * Convert.ToDecimal(0.10);
-            orderToReturn.Total = orderToReturn.Amount + orderToReturn.Taxes + orderToReturn.Comission;
-            _repo.Add(orderToReturn);
-
+            order.Comission = orderForCreateDto.Comission - order.Amount;
+            order.Status = "Processing";
+            order.Taxes = order.Amount * 0.10;
+            order.Total = order.Amount + order.Taxes + order.Comission;
+            _repo.Add(order);
+            
             if (await _repo.SaveAll())
             {
-
+                var orderForReturn = _mapper.Map<OrderForReturnDto>(order);
+                return CreatedAtRoute(null, orderForReturn);
             }
-
-        }*/
-
+            return BadRequest("Transaction failed.");
+        }
+        
         [HttpGet("comission")]
         public async Task<IActionResult> GetComission(ComissionToGetDto comissionToGetDto)
         {
             var comission = await _repo.GetComissionValue(comissionToGetDto.Amount, comissionToGetDto.SenderId, comissionToGetDto.RecipientId);
 
-            var comissionAmount = Convert.ToDecimal(comission) + comissionToGetDto.Amount;
+            var comissionAmount = (comission * comissionToGetDto.Amount) + comissionToGetDto.Amount;
 
-            return Ok(comission);
+            return Ok(comissionAmount);
         }
     }
 

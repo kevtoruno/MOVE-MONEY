@@ -166,8 +166,8 @@ namespace MoveMoney.API.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     ComissionId = table.Column<int>(nullable: false),
-                    MinAmount = table.Column<decimal>(nullable: false),
-                    MaxAmount = table.Column<decimal>(nullable: false),
+                    MinAmount = table.Column<double>(nullable: false),
+                    MaxAmount = table.Column<double>(nullable: false),
                     Percentage = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
@@ -253,10 +253,10 @@ namespace MoveMoney.API.Migrations
                     IsClosed = table.Column<bool>(nullable: false),
                     DeliveryType = table.Column<string>(nullable: true),
                     Status = table.Column<string>(nullable: true),
-                    Comission = table.Column<decimal>(nullable: false),
-                    Amount = table.Column<decimal>(nullable: false),
-                    Taxes = table.Column<decimal>(nullable: false),
-                    Total = table.Column<decimal>(nullable: false)
+                    Comission = table.Column<double>(nullable: false),
+                    Amount = table.Column<double>(nullable: false),
+                    Taxes = table.Column<double>(nullable: false),
+                    Total = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {

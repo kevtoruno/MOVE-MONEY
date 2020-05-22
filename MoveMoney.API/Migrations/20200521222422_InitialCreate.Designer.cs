@@ -9,7 +9,7 @@ using MoveMoney.API.Data;
 namespace MoveMoney.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200521032006_InitialCreate")]
+    [Migration("20200521222422_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -180,11 +180,11 @@ namespace MoveMoney.API.Migrations
                     b.Property<int>("ComissionId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("MaxAmount")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("MaxAmount")
+                        .HasColumnType("REAL");
 
-                    b.Property<decimal>("MinAmount")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("MinAmount")
+                        .HasColumnType("REAL");
 
                     b.Property<double>("Percentage")
                         .HasColumnType("REAL");
@@ -262,11 +262,11 @@ namespace MoveMoney.API.Migrations
                     b.Property<int>("AgencyDestinationId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Amount")
+                        .HasColumnType("REAL");
 
-                    b.Property<decimal>("Comission")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Comission")
+                        .HasColumnType("REAL");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
@@ -286,11 +286,11 @@ namespace MoveMoney.API.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Taxes")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Taxes")
+                        .HasColumnType("REAL");
 
-                    b.Property<decimal>("Total")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Total")
+                        .HasColumnType("REAL");
 
                     b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
@@ -496,7 +496,7 @@ namespace MoveMoney.API.Migrations
             modelBuilder.Entity("MoveMoney.API.Models.ComissionRange", b =>
                 {
                     b.HasOne("MoveMoney.API.Models.Comission", "Comission")
-                        .WithMany()
+                        .WithMany("ComissionRange")
                         .HasForeignKey("ComissionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

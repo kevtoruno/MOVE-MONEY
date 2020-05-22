@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace MoveMoney.API.Dtos
 {
-    public class OrderForReturn
+    public class OrderForReturnDto
     {
+        public int Id { get; set; }
         public int UserId { get; set; }
         public int SenderId { get; set; }
         public int RecipientId { get; set; }

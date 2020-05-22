@@ -58,9 +58,9 @@ namespace MoveMoney.API.Data
 
         public async Task<string> CustomerExists(string phoneNumber, string Identification)
         {
-            if(await _context.Customers.AnyAsync(c => c.PhoneNumber == phoneNumber))
+            if (await _context.Customers.AnyAsync(c => c.PhoneNumber == phoneNumber))
                 return "This phone Number has been used already";
-            else if(await _context.Customers.AnyAsync(c => c.Identification == Identification))
+            else if (await _context.Customers.AnyAsync(c => c.Identification == Identification))
                 return "This Identification has been used already";
             return null;
         }
@@ -86,14 +86,17 @@ namespace MoveMoney.API.Data
             return user;
         }
 
-        public async Task<double> GetComissionValue(decimal amount, int senderCountryId, int receiverCountryId)
+        public async Task<double> GetComissionValue(double amount, int senderCountryId, int receiverCountryId)
         {
-            var comission = await _context.Comissions.FirstOrDefaultAsync(c => c.CountryReceiverId == receiverCountryId && c.CountrySenderId == senderCountryId);
-        
-            var comissionRange = await _context.ComissionRanges
-            .FirstOrDefaultAsync(c => c.ComissionId == comission.Id /*&& c.MinAmount <= amount*/);
+            var comission = _context.Comissions
+            .Include(c => c.ComissionRange)
+            .Where(c => c.CountryReceiverId == receiverCountryId && c.CountrySenderId == senderCountryId)
+            .FirstOrDefault();
 
-            
+            var comissionRange = await _context.ComissionRanges
+            .Where(c => c.ComissionId == comission.Id)
+            .FirstOrDefaultAsync(c => amount >= c.MinAmount && amount <= c.MaxAmount);
+
             return comissionRange.Percentage;
         }
     }

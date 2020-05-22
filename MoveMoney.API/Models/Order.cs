@@ -14,14 +14,15 @@ namespace MoveMoney.API.Models
         public Agency AgencyDestination { get; set; }
         public int AgencyDestinationId { get; set; }
         public ClosingCashAgentDetail ClosingCashAgentDetail { get; set; }
+        //public Int64 OrderId { get; set; }
         public DateTime Created { get; set; }
         public bool IsClosed { get; set; }
         public string DeliveryType { get; set; } //Pickup or Delivery
         public string Status { get; set; } //Processing, Processed, Ready, On Delivery, Completed
-        public decimal Comission { get; set; }
-        public decimal Amount { get; set; }
-        public decimal Taxes { get; set; }
-        public decimal Total { get; set; }
+        public double Comission { get; set; }
+        public double Amount { get; set; }
+        public double Taxes { get; set; }
+        public double Total { get; set; }
 
         public Order()
         {

@@ -15,6 +15,7 @@ export class OrderNewComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   options2: string[] = ['Bull', 'Shit', 'Bye'];
   filteredOptions2: Observable<string[]>;
+  value: boolean;
   constructor() { }
 
   ngOnInit() {
@@ -27,6 +28,10 @@ export class OrderNewComponent implements OnInit {
       map(value => this._filter(value))
     );
     
+  }
+
+  changeState() {
+    this.value = true;
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();

@@ -7,6 +7,6 @@ namespace MoveMoney.API.Dtos
     {
         public int SenderId { get; set; }
         public int RecipientId { get; set; }
-        public decimal Amount { get; set; }
+        public double Amount { get; set; }
     }
 }

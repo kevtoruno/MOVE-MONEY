@@ -1,25 +1,24 @@
 [
     {
-        "ComissionId" : 1,
+        "comissionId" : 9,
         "minAmount" : 0,
         "maxAmount" : 100,
         "percentage" : 0.10
     },
     {
-        "ComissionId" : 1,
+        "comissionId" : 9,
         "minAmount" : 101,
         "maxAmount" : 500,
         "percentage" : 0.08
     },
     {
-        "ComissionId" : 1,
+        "comissionId" : 9,
         "minAmount" : 501,
         "maxAmount" : 1000,
         "percentage" : 0.06
     },
     {
-     
-        "ComissionId" : 1,
+        "comissionId" : 9,
         "minAmount" : 1001,
         "maxAmount" : 1500,
         "percentage" : 0.04

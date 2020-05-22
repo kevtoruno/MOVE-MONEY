@@ -22,7 +22,7 @@ namespace MoveMoney.API.Data
         Task<User> GetUser(int id);
 
         //Order functions
-        Task<double> GetComissionValue(decimal amount, int senderCountry, int receiverCountry);
+        Task<double> GetComissionValue(double amount, int senderCountry, int receiverCountry);
 
     }
 }
