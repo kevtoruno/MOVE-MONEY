@@ -47,7 +47,7 @@
                        [matAutocomplete]="auto3" [formControl] = "agencyControl">
                     <mat-autocomplete #auto3="matAutocomplete" [displayWith] = "displayFnAgency">
                       <mat-option *ngFor="let agency of filteredAgency | async" [value]="agency">
-                        {{agency.agencyName + " - " + agency.agencyType + " " + agency.city | titlecase}}
+                        {{agency.agencyName + " - " + agency.agencyType + " " + agency.city}}
                       </mat-option>
                     </mat-autocomplete>
                   </mat-form-field>

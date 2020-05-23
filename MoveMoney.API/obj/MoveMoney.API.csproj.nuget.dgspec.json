@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Move Money\\MOVE-MONEY\\movemoney.api\\MoveMoney.API.csproj": {}
+    "C:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\movemoney.api\\MoveMoney.API.csproj": {}
   },
   "projects": {
-    "D:\\Move Money\\MOVE-MONEY\\movemoney.api\\MoveMoney.API.csproj": {
+    "C:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\movemoney.api\\MoveMoney.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Move Money\\MOVE-MONEY\\movemoney.api\\MoveMoney.API.csproj",
+        "projectUniqueName": "C:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\movemoney.api\\MoveMoney.API.csproj",
         "projectName": "MoveMoney.API",
-        "projectPath": "D:\\Move Money\\MOVE-MONEY\\movemoney.api\\MoveMoney.API.csproj",
-        "packagesPath": "C:\\Users\\bladi\\.nuget\\packages\\",
-        "outputPath": "D:\\Move Money\\MOVE-MONEY\\movemoney.api\\obj\\",
+        "projectPath": "C:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\movemoney.api\\MoveMoney.API.csproj",
+        "packagesPath": "C:\\Users\\Keiktsu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\movemoney.api\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\bladi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Keiktsu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -93,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
