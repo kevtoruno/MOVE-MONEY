@@ -2,6 +2,7 @@ using AutoMapper;
 using System.Linq;
 using MoveMoney.API.Dtos;
 using MoveMoney.API.Models;
+using System.Collections.Generic;
 
 namespace MoveMoney.API.Helper
 {
@@ -21,7 +22,11 @@ namespace MoveMoney.API.Helper
             CreateMap<User, UserForRegisterDto>();
             CreateMap<UserForRegisterDto, User>();    
             CreateMap<Order, OrderForReturnDto>();
-            
+            CreateMap<Customer, CustomerToReturnDto>();
+            CreateMap<List<Customer>, List<CustomerToReturnDto>>();
+            CreateMap<Agency, AgencyToReturnDto>();
+            CreateMap<List<Agency>, List<AgencyToReturnDto>>();
+            //CreateMap<IEnumerable<CustomerToReturnDto>, IEnumerable<Customer>>();
             //CreateMap<>
         }
     }

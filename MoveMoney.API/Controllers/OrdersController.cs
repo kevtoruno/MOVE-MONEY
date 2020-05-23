@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace MoveMoney.API.Controllers
 {
     [Route("api/orders")]
-    [Authorize]
+    
     [ApiController]
     public class OrdersController : ControllerBase
     {
@@ -27,6 +27,7 @@ namespace MoveMoney.API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateOrder(OrderForCreateDto orderForCreateDto)
         {
             if (orderForCreateDto.UserId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -78,6 +79,25 @@ namespace MoveMoney.API.Controllers
             var comissionAmount = (comission * comissionToGetDto.Amount) + comissionToGetDto.Amount;
 
             return Ok(comissionAmount);
+        }
+
+        [HttpGet("customer/autocomplete")]
+        public async Task<IActionResult> GetCustomerAutoComplete([FromQuery] string names)
+        {
+            var customers = await _repo.GetCustomersAutoComplete(names);
+
+            var customerToReturn = _mapper.Map<IEnumerable<CustomerToReturnDto>>(customers);
+
+            return Ok(customerToReturn);
+        }
+        [HttpGet("agency/autocomplete")]
+        public async Task<IActionResult> GetAgencyAutoComplete([FromQuery] string name)
+        {
+            var agencies = await _repo.GetAgencyAutoComplete(name);
+
+            var agencyToReturn = _mapper.Map<IEnumerable<AgencyToReturnDto>>(agencies);
+
+            return Ok(agencyToReturn);
         }
     }
 

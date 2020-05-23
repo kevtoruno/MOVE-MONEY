@@ -12,5 +12,11 @@ export interface Customer {
     country: string;
     city: string;
     address?: string;
-
 }
+
+export declare type Customers = Customer[]
+
+export interface CustomerParams {
+    customers: Customers;
+}
+

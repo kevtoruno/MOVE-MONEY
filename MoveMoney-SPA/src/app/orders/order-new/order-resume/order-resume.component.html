@@ -31,7 +31,14 @@
                     <label class ="label-design-detail ml-2">Miami HQ</label>
                   </div>
                 </div>
-                
+
+                <div class="row mt-4">
+                  <div class="col-md-12">
+                    <label class ="label-design">Delivery Type:</label>
+                    <label class ="label-design-detail ml-2">Pick Up</label>
+                  </div>
+                </div>
+
                 <div class="row mt-4">
                   <div class="col-md-12">
                     <label class ="label-design">Amount:</label>
@@ -41,30 +48,34 @@
                 <div class="row mt-4">
                   <div class="col-md-12">
                     <label class ="label-design">Comission:</label>
-                    <label class ="label-design-detail ml-2">$40</label>
-                  </div>
-                </div>
-                <div class="row mt-4">
-                  <div class="col-md-12">
-                    <label class ="label-design">Taxes:</label>
-                    <label class ="label-design-detail ml-2">$100</label>
+                    <label class ="label-design-detail ml-2">$40.00</label>
                   </div>
                 </div>
                 <div class="row mt-4">
                   <div class="col-md-12">
                     <label class ="label-design">Subtotal:</label>
-                    <label class ="label-design-detail ml-2">$1140</label>
+                    <label class ="label-design-detail ml-2">$1040.00</label>
                   </div>
                 </div>
                 <div class="row mt-4">
                   <div class="col-md-12">
-                    <label class ="label-design">Total:</label>
-                    <label class ="label-design-detail ml-2">$1200</label>
+                    <label class ="label-design">Taxes:</label>
+                    <label class ="label-design-detail ml-2">$100.00</label>
                   </div>
                 </div>
-                <button class="btn btn-raised btn-info btn-lg col-md-4" type="submit" id="submit-button">Pay
-                  Now</button>
+                
+                <div class="row mt-4">
+                  <div class="col-md-12">
+                    <label class ="label-design">Total:</label>
+                    <label class ="label-design-detail ml-2">$1140.00</label>
+                  </div>
+                </div>
+                <div class="mt-5">
+                  <button class="btn btn-raised btn-warning btn-lg col-md-4 pull-left" (click) = "processCanceled()" id="submit-button">Return</button>
+                  <button class="btn btn-raised btn-success btn-lg col-md-4 pull-right" type="submit" id="submit-button">Process Order</button>
+                </div>
               </form>
+
             </div>
           </div>
         </div>

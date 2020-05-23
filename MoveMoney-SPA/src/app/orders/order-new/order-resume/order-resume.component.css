@@ -26,8 +26,12 @@
   .label-design{
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     font-size: 18px;
+  }
+
+  .centrado{
     text-align: left !important;
   }
+
   .label-design-detail{
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     font-size: 18px;

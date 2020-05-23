@@ -13,6 +13,7 @@ namespace MoveMoney.API.Data
         public MoveMoneyRepository(DataContext context)
         {
             _context = context;
+            
         }
 
         public void Add<T>(T entity) where T : class
@@ -106,6 +107,20 @@ namespace MoveMoney.API.Data
             .FirstOrDefaultAsync(a => a.Id == id);
 
             return agency;
+        }
+
+        public async Task<IEnumerable<Customer>> GetCustomersAutoComplete(string names)
+        {
+            var customerToReturn = await _context.Customers.Where(p => (p.FirstName.ToLower() + " " + p.LastName.ToLower()).Contains(names.ToLower())).ToListAsync();
+
+            return customerToReturn;
+        }
+
+        public async Task<IEnumerable<Agency>> GetAgencyAutoComplete(string name)
+        {
+            var agencyToReturn = await _context.Agency.Where(p => (p.AgencyName.ToLower()).Contains(name.ToLower())).ToListAsync();
+
+            return agencyToReturn;
         }
     }
 }

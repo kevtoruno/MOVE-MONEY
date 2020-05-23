@@ -5820,11 +5820,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\MoveMoney.API\\MoveMoney.API.csproj",
+      "projectUniqueName": "C:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\movemoney.api\\MoveMoney.API.csproj",
       "projectName": "MoveMoney.API",
-      "projectPath": "c:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\MoveMoney.API\\MoveMoney.API.csproj",
+      "projectPath": "C:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\movemoney.api\\MoveMoney.API.csproj",
       "packagesPath": "C:\\Users\\Keiktsu\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\MoveMoney.API\\obj\\",
+      "outputPath": "C:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\movemoney.api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

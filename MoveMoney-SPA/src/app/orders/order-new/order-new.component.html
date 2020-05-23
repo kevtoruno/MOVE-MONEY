@@ -1,4 +1,4 @@
-<div *ngIf="!value" class="main-content">
+<div *ngIf="!isProcessed" class="main-content">
   <div class="container-fluid">
     <div class="row">
       <div  class="col-md-12">
@@ -14,12 +14,11 @@
               <div class="row">
                 <div class="col-md-4 form-group">
                   <mat-form-field class="example-full-width">
-                    <input type="text"  placeholder="Sender" aria-label="Number" matInput [formControl]="myControl"
+                    <input type="text"  placeholder="Sender" aria-label="Number" matInput [formControl]="senderControl"
                       [matAutocomplete]="auto">
-                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                        {{option}}
-
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith] = "displayFn">
+                      <mat-option *ngFor="let item of filteredSender | async" [value]= "item">
+                        {{item.firstName + " " + item.lastName + " - " + item.phoneNumber| titlecase}}
                       </mat-option>
                     </mat-autocomplete>
                   </mat-form-field>
@@ -29,11 +28,11 @@
               <div class="row">
                 <div class="col-md-4 form-group">
                   <mat-form-field class="">
-                    <input type="text" placeholder="Receiver" aria-label="Number" matInput [formControl]="myControl"
+                    <input type="text" placeholder="Receiver" aria-label="Number" matInput [formControl]="receiverControl"
                       [matAutocomplete]="auto2">
-                    <mat-autocomplete  #auto2="matAutocomplete">
-                      <mat-option *ngFor="let option of filteredOptions2 | async" [value]="option">
-                        {{option}}
+                    <mat-autocomplete  #auto2="matAutocomplete" [displayWith] = "displayFn">
+                      <mat-option *ngFor="let item of filteredReceiver | async" [value]="item">
+                        {{item.firstName + " " + item.lastName + " - " + item.phoneNumber | titlecase}}
 
                       </mat-option>
                     </mat-autocomplete>
@@ -45,11 +44,10 @@
                 <div class="col-md-4 form-group">
                   <mat-form-field class="">
                     <input type="text" placeholder="Agency Destination" aria-label="Number" matInput
-                      [formControl]="myControl" [matAutocomplete]="auto">
-                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                        {{option}}
-
+                       [matAutocomplete]="auto3" [formControl] = "agencyControl">
+                    <mat-autocomplete #auto3="matAutocomplete" [displayWith] = "displayFnAgency">
+                      <mat-option *ngFor="let agency of filteredAgency | async" [value]="agency">
+                        {{agency.agencyName + " - " + agency.agencyType + " " + agency.city | titlecase}}
                       </mat-option>
                     </mat-autocomplete>
                   </mat-form-field>
@@ -63,7 +61,7 @@
                       </mat-form-field>
                       <button mat-stroked-button class="btn btn-raised">Calculate</button>
                       <mat-label class="ml-3">
-                        $1050
+                        $1050 
                       </mat-label>
                 </div>
 
@@ -91,4 +89,4 @@
   </div>
 </div>
 
-<app-order-resume *ngIf="value"></app-order-resume>
+<app-order-resume (isProcessed) = "orderCancelled()" *ngIf="isProcessed"></app-order-resume>
