@@ -10,13 +10,16 @@
           </div>
 
           <div class="card-body">
-            <form>
+            <form [formGroup] = "orderForm" (ngSubmit) ="createOrder()">
               <div class="row">
                 <div class="col-md-4 form-group">
                   <mat-form-field class="example-full-width">
-                    <input type="text"  placeholder="Sender" aria-label="Number" matInput [formControl]="senderControl"
-                      [matAutocomplete]="auto">
-                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith] = "displayFn">
+                    <input type="text"  placeholder="Sender" matInput
+                      [matAutocomplete]="auto"
+                      formControlName = "senderId">
+                      <mat-error *ngIf="orderForm.controls['senderId'].hasError('mismatch')">Select a valid Sender.</mat-error>
+                      <mat-error *ngIf="orderForm.controls['senderId'].hasError('required')">Select a Sender.</mat-error>
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"  [displayWith] = "displayFn">
                       <mat-option *ngFor="let item of filteredSender | async" [value]= "item">
                         {{item.firstName + " " + item.lastName + " - " + item.phoneNumber| titlecase}}
                       </mat-option>
@@ -29,7 +32,10 @@
                 <div class="col-md-4 form-group">
                   <mat-form-field class="">
                     <input type="text" placeholder="Receiver" aria-label="Number" matInput [formControl]="receiverControl"
-                      [matAutocomplete]="auto2">
+                      [matAutocomplete]="auto2"
+                      formControlName = "recipientId">
+                      <mat-error *ngIf="orderForm.controls['recipientId'].hasError('mismatch')">Select a valid Receiver.</mat-error>
+                      <mat-error *ngIf="orderForm.controls['recipientId'].hasError('required')">Select a Receiver.</mat-error>
                     <mat-autocomplete  #auto2="matAutocomplete" [displayWith] = "displayFn">
                       <mat-option *ngFor="let item of filteredReceiver | async" [value]="item">
                         {{item.firstName + " " + item.lastName + " - " + item.phoneNumber | titlecase}}
@@ -44,7 +50,9 @@
                 <div class="col-md-4 form-group">
                   <mat-form-field class="">
                     <input type="text" placeholder="Agency Destination" aria-label="Number" matInput
-                       [matAutocomplete]="auto3" [formControl] = "agencyControl">
+                       [matAutocomplete]="auto3" formControlName = "agencyDestinationId">
+                      <mat-error *ngIf="orderForm.controls['agencyDestinationId'].hasError('mismatch')">Select a valid Destination Agency.</mat-error>
+                      <mat-error *ngIf="orderForm.controls['agencyDestinationId'].hasError('required')">Select a Destination Agency.</mat-error>
                     <mat-autocomplete #auto3="matAutocomplete" [displayWith] = "displayFnAgency">
                       <mat-option *ngFor="let agency of filteredAgency | async" [value]="agency">
                         {{agency.agencyName + " - " + agency.agencyType + " " + agency.city}}
@@ -57,25 +65,26 @@
                 </div>
                 <div class="col-md-3 form-group">
                       <mat-form-field appearance="">
-                        <input matInput type="number" placeholder="Amount to transfer">
+                        <input matInput type="number" [formControl] = "comissionControl" placeholder="Amount to transfer">
+                        <mat-error *ngIf="hasError('amount', 'required')">Amount is required.</mat-error>
+                        <mat-hint *ngIf="amountComission" class=" comissionValue">
+                          ${{amountComission}}
+                        </mat-hint>
                       </mat-form-field>
-                      <button mat-stroked-button class="btn btn-raised">Calculate</button>
-                      <mat-label class="ml-3">
-                        $1050 
-                      </mat-label>
+                      
                 </div>
 
               </div>
               <div class="row">
                 <div class="col-md-4 form-group">
-                  <mat-radio-group aria-label="Select an option">
-                    <mat-radio-button class="mr-4" value="1">Pick up at Agency</mat-radio-button>
-                    <mat-radio-button value="2">Delivery</mat-radio-button>
+                  <mat-radio-group aria-label="Select an option" formControlName = "deliveryType">
+                    <mat-radio-button [checked] = "true" class="mr-4" value="Pick up at Agency">Pick up at Agency</mat-radio-button>
+                    <mat-radio-button value="Delivery">Delivery</mat-radio-button>
                   </mat-radio-group>
                 </div>
               </div>
 
-              <button (click) = "changeState()"mat-raised-button type="submit" class="btn btn-info pull-right">Next</button>
+              <button mat-raised-button type="submit" class="btn btn-info pull-right">Next</button>
               <div class="clearfix"></div>
             </form>
 

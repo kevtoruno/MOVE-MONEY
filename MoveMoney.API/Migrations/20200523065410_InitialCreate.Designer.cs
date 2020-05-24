@@ -9,7 +9,7 @@ using MoveMoney.API.Data;
 namespace MoveMoney.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200521222422_InitialCreate")]
+    [Migration("20200523065410_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

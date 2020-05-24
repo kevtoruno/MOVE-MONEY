@@ -72,7 +72,7 @@ namespace MoveMoney.API.Controllers
         }
 
         [HttpGet("comission")]
-        public async Task<IActionResult> GetComission(ComissionToGetDto comissionToGetDto)
+        public async Task<IActionResult> GetComission([FromQuery]ComissionToGetDto comissionToGetDto)
         {
             var comission = await _repo.GetComissionValue(comissionToGetDto.Amount, comissionToGetDto.SenderId, comissionToGetDto.RecipientId);
 

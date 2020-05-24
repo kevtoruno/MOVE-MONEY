@@ -19,28 +19,40 @@ export class OrderService {
     return this.http.get<CustomerParams>(`${this.baseUrl}orders/customer/autocomplete`, {
       observe: 'response',
       params: {
-        names : names
+        names: names
       }
     })
-    .pipe(
-      map(res => {
-        return res.body;
-      })
-    );
+      .pipe(
+        map(res => {
+          return res.body;
+        })
+      );
   }
 
-  getAgencyAC(name: string): Observable<AgencyParams>{
+  getAgencyAC(name: string): Observable<AgencyParams> {
     return this.http.get<AgencyParams>(`${this.baseUrl}orders/agency/autocomplete`, {
       observe: 'response',
       params: {
-        name : name
+        name: name
       }
     })
-    .pipe(
-      map(res => {
-        return res.body;
-      })
-    );
+      .pipe(
+        map(res => {
+          return res.body;
+        })
+      );
+  }
+
+  getComissionValue(senderId, recipientId, amount): Observable<number> {
+    let params = new HttpParams();
+    if (!amount) {
+      amount = 1;
+    }
+    params = params.append('senderId', senderId);
+    params = params.append('recipientId', recipientId);
+    params = params.append('amount', amount);
+    return this.http.get<number>(`${this.baseUrl}orders/comission?senderId=${senderId}&recipientId=${recipientId
+    }&amount=${amount}`);
   }
 
 }
