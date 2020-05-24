@@ -11,6 +11,7 @@ namespace MoveMoney.API.Helper
         public AutoMapperProfiles()
         {
             //Source , Destination
+            //This is to infere, User into UserForDetailDto and get just the names from the Agency and the role
             CreateMap<User, UserForDetailDto>()
                 .ForMember(dest => dest.Agency, 
                     opt => opt.MapFrom(src => src.Agency.AgencyName))

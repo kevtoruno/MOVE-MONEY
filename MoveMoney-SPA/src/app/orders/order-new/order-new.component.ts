@@ -6,6 +6,7 @@ import { OrderService } from 'app/_services/order.service';
 import { Customer, Customers } from 'app/_models/Customer';
 import { Agencies } from 'app/_models/Agency';
 import { RequireMatch as RequireMatch } from '../../_helpers/RequireMatch'
+import { AuthService } from 'app/_services/auth.service';
 
 @Component({
   selector: 'app-order-new',
@@ -28,7 +29,7 @@ export class OrderNewComponent implements OnInit {
 
   isProcessed: boolean;
   amountComission: number;
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService, private authService: AuthService) { }
 
   ngOnInit() {
     this.initiateValidation();
@@ -74,7 +75,7 @@ export class OrderNewComponent implements OnInit {
   }
 
   initiateValidation() {
-
+    
     this.orderForm = new FormGroup({
       deliveryType: new FormControl(),
     });
@@ -88,7 +89,8 @@ export class OrderNewComponent implements OnInit {
   }
   
   createOrder() {
-      console.log(this.orderForm.controls['senderId'].value.id);
+      //console.log(this.orderForm.controls['senderId'].value.id);
+      console.log(JSON.parse(localStorage.getItem('user')).id);
       return console.log('It is valid!');
   }
   changeState() {
@@ -122,7 +124,6 @@ export class OrderNewComponent implements OnInit {
   }
 
   lookupAgency(value: any): Observable<Customers> {
-    console.log(value);
     if (typeof (value) === 'string') {
       return this.orderService.getAgencyAC(value.toLowerCase()).pipe(
         map(results => {

@@ -25,6 +25,7 @@ namespace MoveMoney.API.Helper
         public static async Task<PagedList<T>> CreateAsync (IQueryable<T> source, int pageNumber, int pageSize)
         {
             var count = await source.CountAsync();
+            //This set to skip, the previous pages, and only return the specified "pageSize" that comes there after.
             var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
 
             return new PagedList<T>(items, count ,pageNumber, pageSize);

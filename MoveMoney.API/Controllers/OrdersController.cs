@@ -26,10 +26,12 @@ namespace MoveMoney.API.Controllers
             _repo = repo;
         }
 
+        //Create order process
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> CreateOrder(OrderForCreateDto orderForCreateDto)
         {
+            //This checks if the user processing the order is logged or not.
             if (orderForCreateDto.UserId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             {
                 return Unauthorized("You are not loggedin");
@@ -47,7 +49,7 @@ namespace MoveMoney.API.Controllers
                 return BadRequest("Amount must be higher than 0.");
 
             var order = _mapper.Map<Order>(orderForCreateDto);
-
+            
             order.Comission = orderForCreateDto.Comission - order.Amount;
             order.Status = "Processing";
             order.Taxes = order.Amount * 0.10;
@@ -70,7 +72,7 @@ namespace MoveMoney.API.Controllers
             }
             return BadRequest("Transaction failed.");
         }
-
+        //This is to get the Comission % in specific, from the amount to transfer, senderCountryId, recipientCountryId
         [HttpGet("comission")]
         public async Task<IActionResult> GetComission([FromQuery]ComissionToGetDto comissionToGetDto)
         {
@@ -81,6 +83,7 @@ namespace MoveMoney.API.Controllers
             return Ok(comissionAmount);
         }
 
+        //This is to get the autocomplete results "like" for the customer's records
         [HttpGet("customer/autocomplete")]
         public async Task<IActionResult> GetCustomerAutoComplete([FromQuery] string names)
         {
@@ -90,6 +93,8 @@ namespace MoveMoney.API.Controllers
 
             return Ok(customerToReturn);
         }
+
+        //This is to get the autocomplete results "like" for the customer's records
         [HttpGet("agency/autocomplete")]
         public async Task<IActionResult> GetAgencyAutoComplete([FromQuery] string name)
         {

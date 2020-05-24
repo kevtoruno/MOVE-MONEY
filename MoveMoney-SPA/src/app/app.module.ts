@@ -23,7 +23,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { AgmCoreModule } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { CustomerNewComponent } from './customers/customer-new/customer-new.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -49,10 +48,7 @@ import { PaginatorOptions } from './_helpers/PaginatorOptions';
     ComponentsModule,
     RouterModule,
     FlexLayoutModule,
-    AppRoutingModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
-    })
+    AppRoutingModule
   ],
   declarations: [
     AppComponent,

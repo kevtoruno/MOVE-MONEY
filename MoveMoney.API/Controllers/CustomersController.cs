@@ -35,6 +35,7 @@ namespace MoveMoney.API.Controllers
             return Ok(getCustomers);
         }
 
+        //This creates a new customer
         [HttpPost]
         public async Task<IActionResult> CreateCustomer(Customer customer)
         {

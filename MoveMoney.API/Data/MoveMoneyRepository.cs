@@ -13,19 +13,19 @@ namespace MoveMoney.API.Data
         public MoveMoneyRepository(DataContext context)
         {
             _context = context;
-            
-        }
 
+        }
+        //This is used to Add records from any generic class
         public void Add<T>(T entity) where T : class
         {
             _context.Add(entity);
         }
-
+        //This is used to delete records from any generic class.
         public void Delete<T>(T entity) where T : class
         {
             _context.Remove(entity);
         }
-
+        //This is to check if the context was saved successfully and return a bool value
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
@@ -88,12 +88,14 @@ namespace MoveMoney.API.Data
         }
 
         public async Task<double> GetComissionValue(double amount, int senderCountryId, int receiverCountryId)
-        {
+        {   
+            //Here we get the Comission ID from the master table based on the sender country and receiver country
             var comission = _context.Comissions
             .Include(c => c.ComissionRange)
             .Where(c => c.CountryReceiverId == receiverCountryId && c.CountrySenderId == senderCountryId)
             .FirstOrDefault();
 
+            //Once we get the Comission ID from the master table, we proceed to get a value based on the min and max amount.
             var comissionRange = await _context.ComissionRanges
             .Where(c => c.ComissionId == comission.Id)
             .FirstOrDefaultAsync(c => amount >= c.MinAmount && amount <= c.MaxAmount);
