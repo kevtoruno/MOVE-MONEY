@@ -6,6 +6,7 @@ import { User } from '../_models/User'
 import { Agency, AgencyParams } from '../_models/Agency'
 import { Customer, CustomerParams } from 'app/_models/Customer';
 import { map } from 'rxjs/operators';
+import { OrderToProcess } from 'app/_models/OrderToProcess';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +53,11 @@ export class OrderService {
     params = params.append('recipientId', recipientId);
     params = params.append('amount', amount);
     return this.http.get<number>(`${this.baseUrl}orders/comission?senderId=${senderId}&recipientId=${recipientId
-    }&amount=${amount}`);
+      }&amount=${amount}`);
+  }
+
+  createOrder(order: OrderToProcess) {
+    return this.http.post(`${this.baseUrl}orders`, order);
   }
 
 }

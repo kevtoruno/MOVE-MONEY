@@ -1,4 +1,5 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { OrderToProcess } from 'app/_models/OrderToProcess';
 
 @Component({
   selector: 'app-order-resume',
@@ -7,10 +8,12 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class OrderResumeComponent implements OnInit {
   @Output() isProcessed = new EventEmitter<boolean>();
+  @Input() order: any;
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.order);
   }
 
   processCanceled() {

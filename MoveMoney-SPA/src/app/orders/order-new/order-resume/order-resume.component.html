@@ -1,5 +1,82 @@
 <div class="main-content">
   <div class="container-fluid">
+    <form class="card centerForm">
+      <div class="card-header card-header-info">
+        <h4 class="card-title">Order invoice</h4>
+        <p class="card-category">Confirm the processing of the order</p>
+      </div>
+
+      <div class="container-design">
+
+        <div class="row-design row-design-left">
+          
+          <div class="item-design">
+            <label class ="label-design title-align">Sender</label>
+            <label class ="label-design-detail">{{order.senderName}}</label>
+          </div>
+
+          <div class="item-design">
+            <label class ="label-design title-align">Receiver</label>
+            <label class ="label-design-detail">{{order.receiverName}}</label>
+          </div>
+
+          <div class="item-design">
+            <label class ="label-design title-align">Agency Destination</label>
+            <label class ="label-design-detail">{{order.agencyDestinationName}}</label>
+          </div>
+
+          <div class="item-design">
+            <label class ="label-design title-align">Delivery Type</label>
+            <label class ="label-design-detail">{{order.deliveryType}}</label>
+          </div>
+          <div class="item-design">
+            <label class ="label-design title-align">Amount</label>
+            <label class ="label-design-detail">{{order.amount | currency}}</label>
+          </div>
+        </div>
+
+        <div class="row-design row-design-right">
+          <div class="item-design">
+            <label class ="label-design title-align">Comission</label>
+            <label class ="label-design-detail">{{order.comission | currency}}</label>
+          </div>
+
+          <div class="item-design">
+            <label class ="label-design title-align">Subtotal</label>
+            <label class ="label-design-detail">{{order.amount + order.comission | currency}}</label>
+          </div>
+          <div class="item-design">
+            <label class ="label-design title-align">Taxes</label>
+            <label class ="label-design-detail">{{order.taxes | currency}}</label>
+          </div>
+          <div class="item-design">
+            <label class ="label-design title-align">Total</label>
+            <label class ="label-design-detail">{{order.total | currency}}</label>
+          </div>
+        </div>
+        
+      </div>
+      <div *ngIf="order.deliveryType == 'Delivery'" class="row-design-address">
+        <div class="item-design">
+          <label class ="label-design title-align">Address</label>
+          <label class ="label-design-detail">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+            Doloribus in natus eos, placeat maiores tenetur sunt esse voluptatem sequi voluptates!</label>
+        </div>
+      </div>
+
+      <div class="row-btn">
+        <button class="btn btn-design btn-success" type="submit" id="submit-button">Process Order</button>
+        <button class="btn btn-design btn-warning " (click) = "processCanceled()" id="submit-button">Return</button>
+      </div>
+    </form>
+    
+  </div>
+  
+</div>
+
+
+<!--  <div class="main-content">
+  <div class="container-fluid">
     <div class="row centerForm">
       <div class="col-md-12">
 
@@ -9,65 +86,66 @@
             <h4 class="card-title">Order invoice</h4>
             <p class="card-category">Confirm the processing of the order</p>
           </div>
+
           <div class="row">
             <div class="panel panel-primary">
               <form class="panel-body">
                 <div class="row mt-5">
                   <div class="col-md-12">
                     <label class ="label-design">Sender:</label>
-                    <label class ="label-design-detail ml-2">Juansito en Piedra</label>
+                    <label class ="label-design-detail ml-2">{{order.senderName}}</label>
                   </div>
                 </div>
                 <div class="row mt-4">
                   <div class="col-md-12">
                     <label class ="label-design">Receiver:</label>
-                    <label class ="label-design-detail ml-2">Juansito en Crack</label>
+                    <label class ="label-design-detail ml-2">{{order.receiverName}}</label>
                   </div>
                 </div>
 
                 <div class="row mt-4">
                   <div class="col-md-12">
                     <label class ="label-design">Agency Destination:</label>
-                    <label class ="label-design-detail ml-2">Miami HQ</label>
+                    <label class ="label-design-detail ml-2">{{order.agencyDestinationName}}</label>
                   </div>
                 </div>
 
                 <div class="row mt-4">
                   <div class="col-md-12">
                     <label class ="label-design">Delivery Type:</label>
-                    <label class ="label-design-detail ml-2">Pick Up</label>
+                    <label class ="label-design-detail ml-2">{{order.deliveryType}}</label>
                   </div>
                 </div>
 
                 <div class="row mt-4">
                   <div class="col-md-12">
                     <label class ="label-design">Amount:</label>
-                    <label class ="label-design-detail ml-2">$1000.00</label>
+                    <label class ="label-design-detail ml-2">{{order.amount | currency}}</label>
                   </div>
                 </div>
                 <div class="row mt-4">
                   <div class="col-md-12">
                     <label class ="label-design">Comission:</label>
-                    <label class ="label-design-detail ml-2">$40.00</label>
+                    <label class ="label-design-detail ml-2">{{order.comission | currency}}</label>
                   </div>
                 </div>
                 <div class="row mt-4">
                   <div class="col-md-12">
                     <label class ="label-design">Subtotal:</label>
-                    <label class ="label-design-detail ml-2">$1040.00</label>
+                    <label class ="label-design-detail ml-2">{{order.amount + order.comission | currency}}</label>
                   </div>
                 </div>
                 <div class="row mt-4">
                   <div class="col-md-12">
                     <label class ="label-design">Taxes:</label>
-                    <label class ="label-design-detail ml-2">$100.00</label>
+                    <label class ="label-design-detail ml-2">{{order.taxes | currency}}</label>
                   </div>
                 </div>
                 
                 <div class="row mt-4">
                   <div class="col-md-12">
                     <label class ="label-design">Total:</label>
-                    <label class ="label-design-detail ml-2">$1140.00</label>
+                    <label class ="label-design-detail ml-2">{{order.total | currency}}</label>
                   </div>
                 </div>
                 <div class="mt-5">
@@ -84,29 +162,4 @@
     </div>
 
   </div>
-</div>
-<!--
-<div class="form-group ">
-  <label for="card-number">Card Number</label>
-  <div class="input-group">
-    <div class="form-control" id="card-number" data-bluesnap="ccn"></div>
-    <div id="card-logo" class="input-group-addon"><img
-        src="https://files.readme.io/d1a25b4-generic-card.png" height="20px"></div>
-  </div>
-  <span class="helper-text" id="card-help"></span>
-</div>
-<div class="form-group ">
-  <label for="cvv">CVV</label>
-  <div class="form-control" id="cvv" data-bluesnap="cvv"></div>
-  <span class="helper-text" id="cvv-help"></span>
-</div>
-<div class="form-group ">
-  <label for="exp-date">Exp. (mm/yyyy)</label>
-  <div class="form-control" id="exp-date" data-bluesnap="exp"></div>
-  <span class="helper-text" id="exp-help"></span>
-</div>
-<div class="form-group ">
-  <label for="cardholder-name">Postal Code</label>
-  <input type="text" class="form-control" id="cardholder-name">
-  <span class="helper-text"></span>
 </div>-->

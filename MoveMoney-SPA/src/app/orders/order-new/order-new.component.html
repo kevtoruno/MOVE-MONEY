@@ -67,7 +67,7 @@
                       <mat-form-field appearance="">
                         <input matInput type="number" [formControl] = "comissionControl" placeholder="Amount to transfer">
                         <mat-error *ngIf="hasError('amount', 'required')">Amount is required.</mat-error>
-                        <mat-hint *ngIf="amountComission" class=" comissionValue">
+                        <mat-hint *ngIf="amountComission" class="comissionValue">
                           ${{amountComission}}
                         </mat-hint>
                       </mat-form-field>
@@ -78,7 +78,7 @@
               <div class="row">
                 <div class="col-md-4 form-group">
                   <mat-radio-group aria-label="Select an option" formControlName = "deliveryType">
-                    <mat-radio-button [checked] = "true" class="mr-4" value="Pick up at Agency">Pick up at Agency</mat-radio-button>
+                    <mat-radio-button value = "Pick up" class="mr-4" >Pick up at Agency</mat-radio-button>
                     <mat-radio-button value="Delivery">Delivery</mat-radio-button>
                   </mat-radio-group>
                 </div>
@@ -90,7 +90,6 @@
 
           </div>
 
-
         </div>
       </div>
       
@@ -98,4 +97,4 @@
   </div>
 </div>
 
-<app-order-resume (isProcessed) = "orderCancelled()" *ngIf="isProcessed"></app-order-resume>
+<app-order-resume [order] = "orderToReturn" (isProcessed) = "orderCancelled()" *ngIf="isProcessed"></app-order-resume>

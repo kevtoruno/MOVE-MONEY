@@ -29,6 +29,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { PaginatorOptions } from './_helpers/PaginatorOptions';
+import { JwtModule } from '@auth0/angular-jwt';
+
+export function tokenGet() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   imports: [
@@ -48,6 +53,12 @@ import { PaginatorOptions } from './_helpers/PaginatorOptions';
     ComponentsModule,
     RouterModule,
     FlexLayoutModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGet,
+        whitelistedDomains: ['localhost:5000']
+      }
+    }),
     AppRoutingModule
   ],
   declarations: [

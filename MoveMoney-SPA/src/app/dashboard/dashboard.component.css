@@ -1,23 +1,42 @@
-.button-design {
-    border-radius: 20px;
-    box-shadow:    0 1px #444444;
-    width:         250px;
-    height:        105px;
-    color:         #ffffff;
-    display:       inline-block;
-    font:          normal bold 25px/110px "Open Sans", sans-serif;
-    text-align:    left;
-    margin-top: 30px;
-    margin-left: 10px;
+.dashboard-container{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
+.item-align {
+    justify-content: center;
+    flex: 1;
+}
+.button-design {
+    border-radius: 25px;
+    width:         260px;
+    height:        110px;
+    color:         #f4f4f4;
+    display:       inline-block;
+    font:          normal 25px/110px "Open Sans", sans-serif;
+    font-weight: 600;
+    text-align:    left;
+    margin-top: 55px;
+    margin-left: 20px;
+}
+
+.marginContainerTop {
+    margin-top: 35px;
+
+}
+
+.marginContainerBottom {
+    margin-bottom: 80px;
+}
 .button-design:hover{
     opacity: 0.85;
 }
 
 .icon-design{
     margin-left:10px;
-    margin-right: 40px;
+    margin-right: 20px;
 }
 .green{
     background:    #15d798;
@@ -36,4 +55,15 @@
 
 .row-margin{
     margin-top: 85px;
+    border-top: 1px solid #f4f4f4;
+}
+
+
+@media(max-width: 700px) {
+    .dashboard-container{
+        display:flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+    }
 }
