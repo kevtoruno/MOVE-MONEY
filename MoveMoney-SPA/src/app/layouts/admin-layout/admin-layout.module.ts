@@ -27,7 +27,11 @@ import { PaginatorOptions } from '../../_helpers/PaginatorOptions'
 import { AgencyDetailComponent } from 'app/Agencies/Agency-detail/Agency-detail.component';
 import { OrderNewComponent } from 'app/orders/order-new/order-new.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-import { OrderResumeComponent } from 'app/orders/order-new/order-resume/order-resume.component';
+import { OrderResumeComponent } from 'app/orders/order-resume/order-resume.component';
+import { OrderListComponent } from 'app/orders/order-list/order-list.component';
+import { OrderListResolver } from 'app/_resolvers/order-list.resolver';
+import { OrderDetailResolver } from 'app/_resolvers/order-detail.resolver';
+import { OrderDetailComponent } from 'app/orders/order-detail/order-detail.component';
 
 
 
@@ -58,11 +62,15 @@ import { OrderResumeComponent } from 'app/orders/order-new/order-resume/order-re
     UserListComponent,
     AgencyDetailComponent,
     OrderNewComponent,
-    OrderResumeComponent
+    OrderResumeComponent,
+    OrderListComponent,
+    OrderDetailComponent
   ],
   providers: [
     CustomerListResolver,
-    UserListResolver
+    UserListResolver,
+    OrderListResolver,
+    OrderDetailResolver
   ]
 })
 

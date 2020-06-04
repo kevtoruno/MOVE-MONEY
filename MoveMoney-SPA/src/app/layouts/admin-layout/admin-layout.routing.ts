@@ -10,6 +10,10 @@ import { UserListComponent } from 'app/users/user-list/user-list.component';
 import { UserListResolver } from 'app/_resolvers/user-list.resolver';
 import { AgencyDetailComponent } from 'app/Agencies/Agency-detail/Agency-detail.component';
 import { OrderNewComponent } from 'app/orders/order-new/order-new.component';
+import { OrderListComponent } from 'app/orders/order-list/order-list.component';
+import { OrderListResolver } from 'app/_resolvers/order-list.resolver';
+import { OrderDetailComponent } from 'app/orders/order-detail/order-detail.component';
+import { OrderDetailResolver } from 'app/_resolvers/order-detail.resolver';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -77,6 +81,13 @@ export const AdminLayoutRoutes: Routes = [
     {
         path: 'orders/new', component: OrderNewComponent
     },
-
+    {
+        path: 'orders' , component: OrderListComponent,
+        resolve: {orders: OrderListResolver}
+    },
+    {
+        path: 'orders/:id', component: OrderDetailComponent,
+        resolve: {order : OrderDetailResolver}
+    },
     { path: 'customers/new', component: CustomerNewComponent }
 ];

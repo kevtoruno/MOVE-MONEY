@@ -124,5 +124,34 @@ namespace MoveMoney.API.Data
 
             return agencyToReturn;
         }
+
+        public async Task<IEnumerable<Order>> GetOrders()
+        {
+            var orderToReturn = await _context.Orders
+            .Include(o => o.AgencyDestination)
+            .Include(o => o.Sender)
+            .Include(o => o.Recipient)
+            .Include(o => o.User)
+            .ThenInclude(o => o.Agency)
+            .ToListAsync();
+
+            return orderToReturn;
+        }
+
+        public async Task<Order> GetOrder(int id)
+        {
+            var orderToReturn = await _context.Orders
+            .Where(o => o.Id == id)
+            .Include(o => o.AgencyDestination)
+            .Include(o => o.Sender)
+            .Include(o => o.Sender.TypeIdentification)
+            .Include(o => o.Recipient)
+            .Include(o => o.Recipient.TypeIdentification)
+            .Include(o => o.User)
+            .ThenInclude(o => o.Agency)
+            .FirstOrDefaultAsync();
+
+            return orderToReturn;
+        }
     }
 }

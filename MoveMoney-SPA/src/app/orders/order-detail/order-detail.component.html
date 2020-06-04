@@ -1,0 +1,87 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+
+          <div class="card-header card-header-info">
+            <h4 class="card-title">Order {{order.id}}</h4>
+            <p class="card-category">Full detail of Order {{order.id}}</p>
+          </div>
+          
+          <div class="container-design row-design">
+            <div class="card-body card-category-left">
+              <h4 class="card-category card-design">Date</h4> <span class="">{{order.created | date}}</span>
+              <h4 class="card-category ">User</h4> <span class="">{{order.userName}}</span>
+              <h4 class="card-category ">Origin Agency</h4> <span class="">{{order.agencyOriginName}}</span>
+              <h4 class="card-category ">Agency Destination</h4> <span class="">{{order.agencyDestinationName}}</span>
+            </div>
+            <div class=" card-body card-category-right">
+              <h4 class="card-category card-design">Comission</h4> <span>{{order.comission | currency}}</span>
+              <h4 class="card-category card-design">Taxes</h4> <span>{{order.taxes | currency}}</span>
+              <h4 class="card-category card-design">Subtotal</h4> <span>{{order.comission + order.amount | currency}}</span>
+              <h4 class="card-category card-design">Total</h4> <span>{{order.total | currency}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header card-header-success card-header-height"> </div>
+
+          <div class="container-design row-design">
+            <div class="card-body card-body-right">
+              <h4  class="card-category card-design">Status</h4> <span [ngClass]="{'status-green': order.status == 'Ready', 'status-red' : order.status == 'Processed'}">{{order.status}}</span>
+              <h4 class="card-category card-design mt-4">Amount</h4> <span>{{order.amount | currency}}</span>
+              <button class="btn btn-design">Complete Order</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-10">
+        <div class="card">
+          <div class="card-header card-header-info"> 
+            <h4 class="card-title">Receiver</h4>
+            <p class="card-category"></p>
+          </div>
+
+          <div class="container-design row-design">
+            <div class="card-body card-category-left">
+              <h4 class="card-category card-design">Names</h4> <span class="">{{order.recipientName}}</span>
+              <h4 class="card-category ">Phone Number</h4> <span class="">{{order.recipientPhoneNumber}}</span>
+              <h4 class="card-category ">Country</h4> <span class="">{{order.recipientCountry}}</span>
+              <h4 class="card-category ">City</h4> <span class="">{{order.recipientCity}}</span>
+            </div>
+            <div class=" card-body card-category-right">
+              <h4 class="card-category card-design">Identification</h4> <span>{{order.recipientTypeIdentification + ' - ' + order.recipientIdentification}}</span>
+              <h4 class="card-category card-design">Address</h4> <p>{{order.recipientAddress}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-10">
+        <div class="card">
+          <div class="card-header card-header-info"> 
+            <h4 class="card-title">Sender</h4>
+            <p class="card-category"></p>
+          </div>
+
+          <div class="container-design row-design">
+            <div class="card-body card-category-left">
+              <h4 class="card-category card-design">Names</h4> <span class="">{{order.senderName}}</span>
+              <h4 class="card-category ">Phone Number</h4> <span class="">{{order.senderPhoneNumber}}</span>
+              <h4 class="card-category ">Country</h4> <span class="">{{order.senderCountry}}</span>
+              <h4 class="card-category ">City</h4> <span class="">{{order.senderCity}}</span>
+            </div>
+            <div class=" card-body card-category-right">
+              <h4 class="card-category card-design">Identification</h4> <span>{{order.senderTypeIdentification + ' - ' + order.senderIdentification}}</span>
+              <h4 class="card-category card-design">Address</h4> <p>{{order.senderAddress}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,6 +7,8 @@ import { Agency, AgencyParams } from '../_models/Agency'
 import { Customer, CustomerParams } from 'app/_models/Customer';
 import { map } from 'rxjs/operators';
 import { OrderToProcess } from 'app/_models/OrderToProcess';
+import { OrderToList } from 'app/_models/OrderToList';
+import { OrderToDetail } from 'app/_models/OrderToDetail';
 
 @Injectable({
   providedIn: 'root'
@@ -60,5 +62,16 @@ export class OrderService {
     return this.http.post(`${this.baseUrl}orders`, order);
   }
 
+  getOrders(): Observable<OrderToList[]> {
+    return this.http.get<OrderToList[]>(`${this.baseUrl}orders`);
+  }
+
+  getOrder(id: number): Observable<OrderToDetail> {
+    return this.http.get<OrderToDetail>(`${this.baseUrl}orders/${id}`);
+  }
+
+  processOrder(userId: number, id: number) {
+    return this.http.post(`${this.baseUrl}orders/${userId}/${id}`, {});
+  }
 }
 

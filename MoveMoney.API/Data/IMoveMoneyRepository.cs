@@ -29,6 +29,7 @@ namespace MoveMoney.API.Data
 
         //Order functions
         Task<double> GetComissionValue(double amount, int senderCountry, int receiverCountry);
-        
+        Task<IEnumerable<Order>> GetOrders();
+        Task<Order> GetOrder(int id);
     }
 }

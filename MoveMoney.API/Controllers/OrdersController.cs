@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace MoveMoney.API.Controllers
 {
     [Route("api/orders")]
-    
+
     [ApiController]
     public class OrdersController : ControllerBase
     {
@@ -35,7 +35,7 @@ namespace MoveMoney.API.Controllers
             if (orderForCreateDto.UserId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             {
                 return Unauthorized("You are not loggedin");
-            }           
+            }
 
             var user = await _repo.GetUser(orderForCreateDto.UserId);
 
@@ -49,7 +49,7 @@ namespace MoveMoney.API.Controllers
                 return BadRequest("Amount must be higher than 0.");
 
             var order = _mapper.Map<Order>(orderForCreateDto);
-            
+
             order.Comission = orderForCreateDto.Comission - order.Amount;
             order.Status = "Processing";
             order.Taxes = order.Amount * 0.10;
@@ -74,7 +74,7 @@ namespace MoveMoney.API.Controllers
         }
         //This is to get the Comission % in specific, from the amount to transfer, senderCountryId, recipientCountryId
         [HttpGet("comission")]
-        public async Task<IActionResult> GetComission([FromQuery]ComissionToGetDto comissionToGetDto)
+        public async Task<IActionResult> GetComission([FromQuery] ComissionToGetDto comissionToGetDto)
         {
             var comission = await _repo.GetComissionValue(comissionToGetDto.Amount, comissionToGetDto.SenderId, comissionToGetDto.RecipientId);
 
@@ -103,6 +103,62 @@ namespace MoveMoney.API.Controllers
             var agencyToReturn = _mapper.Map<IEnumerable<AgencyToReturnDto>>(agencies);
 
             return Ok(agencyToReturn);
+        }
+
+        [HttpGet()]
+        public async Task<IActionResult> GetOrders()
+        {
+            var orders = await _repo.GetOrders();
+
+            var orderForList = _mapper.Map<IEnumerable<OrderForListDto>>(orders);
+
+            return Ok(orderForList);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetOrder(int id)
+        {
+            var order = await _repo.GetOrder(id);
+
+            var orderForDetail = _mapper.Map<OrderForDetailDto>(order);
+
+            return Ok(orderForDetail);
+        }
+
+        // This Task is to change the status of the order from "Processing" to "Ready or "Processed" (depending if it is Pick up or Delivery), at the same time adding the money
+        // to the User that processed this order
+        [Authorize]
+        [HttpPost("{userId}/{id}")]
+        public async Task<IActionResult> ProcessOrder(int userId, int id)
+        {
+            //This checks if the user processing the order is logged or not.
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized("You are not authorized");
+            }
+
+            var order = await _repo.GetOrder(id);
+            var user = await _repo.GetUser(userId);
+
+            if (order.Status == "Processing")
+            {
+                if (order.DeliveryType == "Pick up")
+                {
+                    order.Status = "Ready";
+                }
+                else
+                {
+                    order.Status = "Processed";
+                }
+                
+                user.Money += Convert.ToDecimal(order.Total);
+
+                if (await _repo.SaveAll())
+                {
+                    return NoContent();
+                }
+            }
+            return BadRequest("Order cannot be processed");
         }
     }
 

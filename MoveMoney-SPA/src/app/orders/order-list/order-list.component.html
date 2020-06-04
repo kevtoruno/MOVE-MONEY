@@ -1,0 +1,92 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="card">
+
+          <div class="card-header card-header-info">
+            <h4 class="card-title ">Orders</h4>
+          </div>
+
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>
+                    ID
+                  </th>
+                  <th>
+                    Receiver
+                  </th>
+                  <th>
+                    Agency Origin
+                  </th>
+                  <th>
+                    Agency Destination
+                  </th>
+                  <th>
+                    Status
+                  </th>
+                  <th>
+                    Delivery Type
+                  </th>
+                  <th>
+                    Amount
+                  </th>
+                  <th>
+                    View
+                  </th>
+                </thead>
+                <tbody>
+                
+                  <tr *ngFor="let order of ordersToList">
+                      <td>
+                        {{order.id}}
+                      </td>
+                      <td>
+                        {{order.receiverName}}
+                      </td>
+                      <td>
+                        {{order.agencyOriginName}}
+                      </td>
+                      <td >
+                        {{order.agencyDestinationName}}
+                      </td>
+                      <td [ngClass]="{'status-green': order.status == 'Ready', 'status-red' : order.status == 'Processed'}">
+                        {{order.status}}
+                      </td>
+                      <td >
+                        {{order.deliveryType}}
+                      </td>
+                      <td >
+                        {{order.amount | currency}}
+                      </td>
+                      <td>
+                        <a [routerLink]="['/orders/'+order.id]"><i class="material-icons">remove_red_eye</i></a>
+                      </td>
+                
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="card">
+          
+          <div class="card-header card-header-info">
+            <h4 class="card-title text-center ">Actions</h4>
+          </div>
+          <div class="card-body mt-2 text-center">
+            <div [routerLink]="['/orders/new']">
+              <h2><i class="material-icons">note_add</i><a class="btn btn-link pl-2">New Order</a></h2>
+            </div>
+          </div>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

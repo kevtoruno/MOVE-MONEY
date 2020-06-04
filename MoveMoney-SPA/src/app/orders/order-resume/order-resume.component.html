@@ -1,0 +1,76 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <form class="card centerForm" (ngSubmit) = "processOrder()">
+      <div class="card-header card-header-info">
+        <h4 class="card-title">Order invoice</h4>
+        <p class="card-category">Confirm the processing of the order</p>
+      </div>
+
+      <div class="container-design">
+
+        <div class="row-design row-design-left">
+          
+          <div class="item-design">
+            <label class ="label-design title-align">Sender</label>
+            <label class ="label-design-detail">{{order.senderName}}</label>
+          </div>
+
+          <div class="item-design">
+            <label class ="label-design title-align">Receiver</label>
+            <label class ="label-design-detail">{{order.receiverName}}</label>
+          </div>
+
+          <div class="item-design">
+            <label class ="label-design title-align">Agency Destination</label>
+            <label class ="label-design-detail">{{order.agencyDestinationName}}</label>
+          </div>
+
+          <div class="item-design">
+            <label class ="label-design title-align">Delivery Type</label>
+            <label class ="label-design-detail">{{order.deliveryType}}</label>
+          </div>
+          <div class="item-design">
+            <label class ="label-design title-align">Amount</label>
+            <label class ="label-design-detail">{{order.amount | currency}}</label>
+          </div>
+        </div>
+
+        <div class="row-design row-design-right">
+          <div class="item-design">
+            <label class ="label-design title-align">Comission</label>
+            <label class ="label-design-detail">{{order.comission | currency}}</label>
+          </div>
+
+          <div class="item-design">
+            <label class ="label-design title-align">Subtotal</label>
+            <label class ="label-design-detail">{{order.amount + order.comission | currency}}</label>
+          </div>
+          <div class="item-design">
+            <label class ="label-design title-align">Taxes</label>
+            <label class ="label-design-detail">{{order.taxes | currency}}</label>
+          </div>
+          <div class="item-design">
+            <label class ="label-design title-align">Total</label>
+            <label class ="label-design-detail">{{order.total | currency}}</label>
+          </div>
+        </div>
+        
+      </div>
+      <div *ngIf="order.deliveryType == 'Delivery'" class="row-design-address">
+        <div class="item-design">
+          <label class ="label-design title-align">Address</label>
+          <label class ="label-design-detail">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+            Doloribus in natus eos, placeat maiores tenetur sunt esse voluptatem sequi voluptates!</label>
+        </div>
+      </div>
+
+      <div class="row-btn">
+        <button class="btn btn-design btn-success" type="submit" id="submit-button">Process Order</button>
+        <button class="btn btn-design btn-warning " (click) = "processCanceled()" id="submit-button">Return</button>
+      </div>
+    </form>
+    
+  </div>
+  
+</div>
+
