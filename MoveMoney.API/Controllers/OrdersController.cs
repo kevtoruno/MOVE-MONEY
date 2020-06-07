@@ -2,19 +2,17 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
 using MoveMoney.API.Models;
-using MoveMoney.API.Helper;
 using MoveMoney.API.Dtos;
 using MoveMoney.API.Data;
-using System.Diagnostics;
 using System.Collections.Generic;
 using System.Security.Claims;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using MoveMoney.API.Helper;
 
 namespace MoveMoney.API.Controllers
 {
     [Route("api/orders")]
-
     [ApiController]
     public class OrdersController : ControllerBase
     {
@@ -52,7 +50,7 @@ namespace MoveMoney.API.Controllers
 
             order.Comission = orderForCreateDto.Comission - order.Amount;
             order.Status = "Processing";
-            order.Taxes = order.Amount * 0.10;
+            order.Taxes = order.Comission * 0.10;
             order.Total = order.Amount + order.Taxes + order.Comission;
             _repo.Add(order);
 
@@ -81,6 +79,18 @@ namespace MoveMoney.API.Controllers
             var comissionAmount = (comission * comissionToGetDto.Amount) + comissionToGetDto.Amount;
 
             return Ok(comissionAmount);
+        }
+        [HttpGet("country/{agencyId}")]
+        public async Task<IActionResult> GetCountryByAgencyId(int agencyId)
+        {
+            var countryId = await _repo.GetCountryIdByAgency(agencyId);
+            if(countryId > 0){
+                return Ok(countryId);
+            }
+            else{
+                return BadRequest("Something went wrong");
+            }
+            
         }
 
         //This is to get the autocomplete results "like" for the customer's records
@@ -129,6 +139,7 @@ namespace MoveMoney.API.Controllers
         // to the User that processed this order
         [Authorize]
         [HttpPost("{userId}/{id}")]
+        [ServiceFilter(typeof(LogUserActivity))]
         public async Task<IActionResult> ProcessOrder(int userId, int id)
         {
             //This checks if the user processing the order is logged or not.
@@ -155,6 +166,12 @@ namespace MoveMoney.API.Controllers
 
                 if (await _repo.SaveAll())
                 {
+                    HttpContext.Items["orderId"] = order.Id;
+                    HttpContext.Items["orderStatus"] = order.Status;
+                    HttpContext.Items["userFullName"] = user.FirstName + " " + user.LastName;
+                    HttpContext.Items["total"] = order.Total;
+                    HttpContext.Items["eventType"] = "Transfer";
+                    HttpContext.Items["agencyId"] = user.AgencyId;
                     return NoContent();
                 }
             }

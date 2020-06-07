@@ -16,6 +16,7 @@ namespace MoveMoney.API.Data
         {
             var user = await _context.Users
             .Include(u => u.UserRole)
+            .Include(u => u.Agency)
             .FirstOrDefaultAsync(u => u.UserName == userName);
 
             if (user == null)

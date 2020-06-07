@@ -99,6 +99,15 @@
   border-radius: 25px;
 }
 
+.btn-disabled {
+  display: inline-block;
+  flex-shrink: 2;
+  width: 220px;
+  padding: 20px 20px;
+  background-color: #b1b1b1;
+  border-radius: 25px;
+}
+
 .status-green{
   color: #32CD32;
 }

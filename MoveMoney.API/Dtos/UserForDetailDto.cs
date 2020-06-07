@@ -7,6 +7,8 @@ namespace MoveMoney.API.Dtos
     {
         public int Id { get; set; }
         public string Agency { get; set; }
+        public int AgencyOriginId { get; set; }
+        public int AgencyCountryId { get; set; }
         public string UserRole { get; set; }
         public string UserName { get; set; }
         public string FirstName { get; set; }

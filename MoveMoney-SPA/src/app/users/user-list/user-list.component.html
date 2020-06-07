@@ -53,7 +53,7 @@
                         Inactive
                       </td>
                       <td >
-                        ${{user.money}}
+                        {{user.money | currency}}
                       </td>
                       <td>
                         <a [routerLink]="['/users/'+user.id]"><i class="material-icons">remove_red_eye</i></a>

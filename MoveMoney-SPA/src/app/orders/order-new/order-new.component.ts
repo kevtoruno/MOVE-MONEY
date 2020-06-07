@@ -5,11 +5,13 @@ import { map, startWith, debounceTime, switchMap, tap, catchError } from 'rxjs/o
 import { OrderService } from 'app/_services/order.service';
 import { Customer, Customers } from 'app/_models/Customer';
 import { Agencies } from 'app/_models/Agency';
-import { RequireMatch as RequireMatch } from '../../_helpers/RequireMatch'
+import { RequireMatch as RequireMatch, RequireDestinationAgency as RequireDestinationAgency } from '../../_helpers/RequireMatch'
 import { AuthService } from 'app/_services/auth.service';
 import { ComponentsModule } from 'app/components/components.module';
 import { OrderToProcess } from 'app/_models/OrderToProcess';
 import { AlertifyService } from 'app/_services/alertify.service';
+import { jsonpFactory } from '@angular/http/src/http_module';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-order-new',
@@ -32,6 +34,9 @@ export class OrderNewComponent implements OnInit {
   isProcessed: boolean;
   amountComission: number;
   orderToReturn: any;
+  countrySenderId: any;
+  countryRecipientId: any;
+
   constructor(private orderService: OrderService, private authService: AuthService, private alertify: AlertifyService) { }
 
   ngOnInit() {
@@ -39,7 +44,7 @@ export class OrderNewComponent implements OnInit {
     this.initiateValidation();
     // Detecting value changes on the amount Control
     this.comissionControl.valueChanges.subscribe(value => {
-      this.lookupComission(1, 3, value);
+      this.lookupComission(value);
     })
 
     // Detecting value changes on the Sender field
@@ -94,10 +99,25 @@ export class OrderNewComponent implements OnInit {
     this.orderForm.addControl('amount', this.comissionControl);
     this.orderForm.addControl('agencyDestinationId', this.agencyControl);
   }
+
   public hasError = (controlName: string, errorName: string) => {
     return this.orderForm.controls[controlName].hasError(errorName);
   }
 
+  // Function that calculates the comission
+  lookupComission(amount: number): Observable<number> {
+    const agencySenderId = JSON.parse(localStorage.getItem('user')).agencyCountryId;
+    let countryRecipientId;
+    if (!isNullOrUndefined(this.orderForm.value.agencyDestinationId.countryId)) {
+      countryRecipientId = this.orderForm.value.agencyDestinationId.countryId;
+      if (amount) {
+        this.orderService.getComissionValue(agencySenderId, countryRecipientId, amount).subscribe(data => {
+          this.amountComission = data;
+        })
+      }
+    }
+    return null;
+  }
   // Function to intiialize the order, if the form validation is correct.
   createOrder() {
     const order = new OrderToProcess();
@@ -118,7 +138,7 @@ export class OrderNewComponent implements OnInit {
       });
     }
   }
-  
+
   // Function to confirm that the order has been processed, and emmits its value to the order-resume component
   changeState() {
     this.isProcessed = true;
@@ -152,7 +172,7 @@ export class OrderNewComponent implements OnInit {
     }
 
   }
- // Function that looks on the agency as Auto Complete
+  // Function that looks on the agency as Auto Complete
   lookupAgency(value: any): Observable<Customers> {
     if (typeof (value) === 'string') {
       return this.orderService.getAgencyAC(value.toLowerCase()).pipe(
@@ -174,18 +194,6 @@ export class OrderNewComponent implements OnInit {
       )
     }
   }
-  // Function that calculates the comission
-  lookupComission(senderId: number, recipientId: number, amount: number): Observable<number> {
-    senderId = 1;
-    recipientId = 3;
-    if (amount) {
-      this.orderService.getComissionValue(senderId, recipientId, amount).subscribe(data => {
-        this.amountComission = data;
-      })
-    }
-    return null;
-  }
-
   // This set a format to display in the customer field
   displayFn(customer): string {
     return customer ? customer.firstName + ' ' + customer.lastName : null;

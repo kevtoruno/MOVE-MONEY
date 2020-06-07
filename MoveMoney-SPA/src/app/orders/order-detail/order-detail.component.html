@@ -33,7 +33,8 @@
             <div class="card-body card-body-right">
               <h4  class="card-category card-design">Status</h4> <span [ngClass]="{'status-green': order.status == 'Ready', 'status-red' : order.status == 'Processed'}">{{order.status}}</span>
               <h4 class="card-category card-design mt-4">Amount</h4> <span>{{order.amount | currency}}</span>
-              <button class="btn btn-design">Complete Order</button>
+              <button *ngIf="agencyOriginId !== order.agencyOriginId" class="btn btn-design">Complete Order</button>
+              <h4 *ngIf="agencyOriginId === order.agencyOriginId" disabled class="mt-5 status-red">Order ready to be delivered</h4>
             </div>
           </div>
         </div>

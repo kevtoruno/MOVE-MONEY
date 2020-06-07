@@ -16,7 +16,11 @@ namespace MoveMoney.API.Helper
                 .ForMember(dest => dest.Agency,
                     opt => opt.MapFrom(src => src.Agency.AgencyName))
                 .ForMember(dest => dest.UserRole,
-                    opt => opt.MapFrom(src => src.UserRole.RoleName));
+                    opt => opt.MapFrom(src => src.UserRole.RoleName))
+                .ForMember(dest => dest.AgencyOriginId,
+                    opt => opt.MapFrom(src => src.AgencyId))
+                .ForMember(dest => dest.AgencyCountryId,
+                opt => opt.MapFrom(src => src.Agency.CountryId));
 
             CreateMap<OrderForCreateDto, Order>();
 

@@ -9,7 +9,7 @@ using MoveMoney.API.Data;
 namespace MoveMoney.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200523065410_InitialCreate")]
+    [Migration("20200606064607_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -379,16 +379,27 @@ namespace MoveMoney.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("AgencyId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Event")
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EventType")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AgencyId");
 
                     b.HasIndex("UserId");
 
@@ -555,6 +566,12 @@ namespace MoveMoney.API.Migrations
 
             modelBuilder.Entity("MoveMoney.API.Models.UserLogs", b =>
                 {
+                    b.HasOne("MoveMoney.API.Models.Agency", "Agency")
+                        .WithMany()
+                        .HasForeignKey("AgencyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("MoveMoney.API.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")

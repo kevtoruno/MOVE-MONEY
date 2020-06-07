@@ -15,6 +15,7 @@ namespace MoveMoney.API
 {
     public class Program
     {
+        public static string EventType = "";
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();

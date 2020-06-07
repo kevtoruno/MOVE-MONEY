@@ -86,9 +86,9 @@ namespace MoveMoney.API.Data
 
             return user;
         }
-
+        // Order Functions
         public async Task<double> GetComissionValue(double amount, int senderCountryId, int receiverCountryId)
-        {   
+        {
             //Here we get the Comission ID from the master table based on the sender country and receiver country
             var comission = _context.Comissions
             .Include(c => c.ComissionRange)
@@ -103,26 +103,12 @@ namespace MoveMoney.API.Data
             return comissionRange.Percentage;
         }
 
-        public async Task<Agency> GetAgency(int id)
-        {
-            var agency = await _context.Agency
-            .FirstOrDefaultAsync(a => a.Id == id);
-
-            return agency;
-        }
 
         public async Task<IEnumerable<Customer>> GetCustomersAutoComplete(string names)
         {
             var customerToReturn = await _context.Customers.Where(p => (p.FirstName.ToLower() + " " + p.LastName.ToLower()).Contains(names.ToLower())).ToListAsync();
 
             return customerToReturn;
-        }
-
-        public async Task<IEnumerable<Agency>> GetAgencyAutoComplete(string name)
-        {
-            var agencyToReturn = await _context.Agency.Where(p => (p.AgencyName.ToLower()).Contains(name.ToLower())).ToListAsync();
-
-            return agencyToReturn;
         }
 
         public async Task<IEnumerable<Order>> GetOrders()
@@ -152,6 +138,44 @@ namespace MoveMoney.API.Data
             .FirstOrDefaultAsync();
 
             return orderToReturn;
+        }
+        //Agency Functions
+
+        public async Task<Agency> GetAgency(int id)
+        {
+            var agency = await _context.Agency
+            .FirstOrDefaultAsync(a => a.Id == id);
+
+            return agency;
+        }
+        public async Task<IEnumerable<Agency>> GetAgencyAutoComplete(string name)
+        {
+            var agencyToReturn = await _context.Agency.Where(p => (p.AgencyName.ToLower()).Contains(name.ToLower())).ToListAsync();
+
+            return agencyToReturn;
+        }
+
+        // UserLog functions
+        public async Task<UserLogs> CreateUserLog(UserLogs userLogs)
+        {
+            await _context.AddAsync(userLogs);
+            await _context.SaveChangesAsync();
+            return userLogs;
+        }
+
+        public async Task<IEnumerable<UserLogs>> GetUserLogs(int id)
+        {
+            var userLogs = await _context.UserLogs.Where(u => u.AgencyId == id).ToListAsync();
+
+            return userLogs;
+        }
+
+        public async Task<int> GetCountryIdByAgency(int AgencyId)
+        {
+            var countryId = await _context.Agency.Where(a => a.Id == AgencyId).FirstOrDefaultAsync();
+            if(countryId == null)
+                return 0;
+            return countryId.CountryId;
         }
     }
 }

@@ -4,11 +4,11 @@
         "agencyId": 1,
         "userRoleId": 1,
         "userName": "admin",
-        "firstName": "kevin",
-        "lastName": "admin",
+        "firstName": "Kevin",
+        "lastName": "Toruño",
         "created" : "2020-05-15",
         "isActive" : true,
-        "money" : 500
+        "money" : 0
     },
     {
         "id": 2,
@@ -19,7 +19,7 @@
         "lastName": "admin",
         "created" : "2020-05-15",
         "isActive" : true,
-        "money" : 500
+        "money" : 0
     },
     {
         "id": 3,
@@ -30,7 +30,7 @@
         "lastName": "admin",
         "created" : "2020-05-15",
         "isActive" : true,
-        "money" : 500
+        "money" : 0
     }
 ]
 

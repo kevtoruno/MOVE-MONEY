@@ -294,12 +294,21 @@ namespace MoveMoney.API.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     UserId = table.Column<int>(nullable: false),
+                    AgencyId = table.Column<int>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
-                    Event = table.Column<string>(nullable: true)
+                    EventType = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Amount = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserLogs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserLogs_Agency_AgencyId",
+                        column: x => x.AgencyId,
+                        principalTable: "Agency",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserLogs_Users_UserId",
                         column: x => x.UserId,
@@ -446,6 +455,11 @@ namespace MoveMoney.API.Migrations
                 name: "IX_Orders_UserId",
                 table: "Orders",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserLogs_AgencyId",
+                table: "UserLogs",
+                column: "AgencyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserLogs_UserId",

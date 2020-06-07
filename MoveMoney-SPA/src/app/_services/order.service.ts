@@ -73,5 +73,9 @@ export class OrderService {
   processOrder(userId: number, id: number) {
     return this.http.post(`${this.baseUrl}orders/${userId}/${id}`, {});
   }
+
+  getCountryId(agencyId: number) {
+    return this.http.get(`${this.baseUrl}orders/country/${agencyId}`);
+  }
 }
 

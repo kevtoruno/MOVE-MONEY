@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Diagnostics;
+using MoveMoney.API.Helper;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Net;
@@ -57,6 +57,7 @@ namespace MoveMoney.API
             services.AddScoped<IMoveMoneyRepository, MoveMoneyRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddAutoMapper(typeof (MoveMoneyRepository).Assembly);
+            services.AddScoped<LogUserActivity>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
