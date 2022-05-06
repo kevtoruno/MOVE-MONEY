@@ -62,6 +62,7 @@ namespace MoveMoney.API.Data
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }    
         }
+        
         public async Task<bool> UserExists(string userName)
         {
             if(await _context.Users.AnyAsync(u => u.UserName == userName))

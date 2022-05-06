@@ -1,34 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\movemoney.api\\MoveMoney.API.csproj": {}
+    "C:\\Users\\Keiktsu\\source\\repos\\MOVE MONEY\\source\\MoveMoney.API\\MoveMoney.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\movemoney.api\\MoveMoney.API.csproj": {
+    "C:\\Users\\Keiktsu\\source\\repos\\MOVE MONEY\\source\\MoveMoney.API\\MoveMoney.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\movemoney.api\\MoveMoney.API.csproj",
+        "projectUniqueName": "C:\\Users\\Keiktsu\\source\\repos\\MOVE MONEY\\source\\MoveMoney.API\\MoveMoney.API.csproj",
         "projectName": "MoveMoney.API",
-        "projectPath": "C:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\movemoney.api\\MoveMoney.API.csproj",
+        "projectPath": "C:\\Users\\Keiktsu\\source\\repos\\MOVE MONEY\\source\\MoveMoney.API\\MoveMoney.API.csproj",
         "packagesPath": "C:\\Users\\Keiktsu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Keiktsu\\source\\Projects\\Sistemas\\MOVE MONEY\\source\\movemoney.api\\obj\\",
+        "outputPath": "C:\\Users\\Keiktsu\\source\\repos\\MOVE MONEY\\source\\MoveMoney.API\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
           "C:\\Users\\Keiktsu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net6.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -39,43 +37,44 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[11.0.0, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[3.1.4, )"
+              "version": "[6.0.4, )"
             },
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
-              "version": "[3.1.4, )"
+              "version": "[6.0.4, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.1.4, )"
+              "version": "[6.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "target": "Package",
-              "version": "[3.1.4, )"
+              "version": "[6.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[3.1.4, )"
+              "version": "[6.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[3.1.4, )"
+              "version": "[6.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
-              "version": "[3.1.4, )"
+              "version": "[6.0.4, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
-              "version": "[6.5.1, )"
+              "version": "[6.17.0, )"
             }
           },
           "imports": [
@@ -96,7 +95,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

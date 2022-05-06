@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/MoveMoney.API/bin/Debug/netcoreapp3.1/MoveMoney.API.dll",
+            "program": "${workspaceFolder}/MoveMoney.API/bin/Debug/net6.0/MoveMoney.API.dll",
             "args": [],
             "cwd": "${workspaceFolder}/MoveMoney.API",
             "stopAtEntry": false,
