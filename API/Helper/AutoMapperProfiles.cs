@@ -28,9 +28,7 @@ namespace MoveMoney.API.Helper
             CreateMap<UserForRegisterDto, User>();
             CreateMap<Order, OrderForReturnDto>();
             CreateMap<Customer, CustomerToReturnDto>();
-            CreateMap<List<Customer>, List<CustomerToReturnDto>>();
             CreateMap<Agency, AgencyToReturnDto>();
-            CreateMap<List<Agency>, List<AgencyToReturnDto>>();
 
             CreateMap<Order, OrderForListDto>()
                 .ForMember(dest => dest.SenderName,
@@ -43,8 +41,6 @@ namespace MoveMoney.API.Helper
                 opt => opt.MapFrom(src => src.User.Agency.AgencyName))
                 .ForMember(dest => dest.AgencyDestinationName,
                 opt => opt.MapFrom(src => src.AgencyDestination.AgencyName));
-
-            CreateMap<List<Order>, List<OrderForListDto>>();
 
             CreateMap<Order, OrderForDetailDto>()
                 .ForMember(dest => dest.SenderName,
