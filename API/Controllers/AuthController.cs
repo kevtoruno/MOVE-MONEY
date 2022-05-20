@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MoveMoney.API.Data;
 using System.Threading.Tasks;
-using MoveMoney.API.Models;
 using MoveMoney.API;
 using System.Security.Claims;
 using System.Text;
@@ -12,7 +11,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Diagnostics;
 using AutoMapper;
-using MoveMoney.API.Dtos;
+using Application.Core.Dtos;
 
 namespace MoveMoney.API.Controllers
 {

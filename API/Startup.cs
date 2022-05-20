@@ -19,6 +19,8 @@ using System.Diagnostics;
 using MoveMoney.API.Data;
 using AutoMapper;
 using Microsoft.IdentityModel.Tokens;
+using Infraestructure;
+using Application;
 
 namespace MoveMoney.API
 {
@@ -34,21 +36,6 @@ namespace MoveMoney.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            if (_env.IsProduction())
-            {
-                services.AddDbContext<DataContext>(x =>
-                {
-                    x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-                });
-            }
-            else
-            {
-                services.AddDbContext<DataContext>(x =>
-                {
-                    x.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
-                });
-            }
-
             services.AddControllers().AddNewtonsoftJson(opt =>
             {
                 opt.SerializerSettings.ReferenceLoopHandling =
@@ -58,18 +45,8 @@ namespace MoveMoney.API
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddAutoMapper(typeof (MoveMoneyRepository).Assembly);
             services.AddScoped<LogUserActivity>();
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
-                    .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
+            services.AddInfrastructure(Configuration);
+            services.AddApplication();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

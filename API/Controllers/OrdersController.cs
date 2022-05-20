@@ -1,138 +1,74 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
-using MoveMoney.API.Models;
-using MoveMoney.API.Dtos;
+using Application.Core.Dtos;
 using MoveMoney.API.Data;
 using System.Collections.Generic;
 using System.Security.Claims;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using MoveMoney.API.Helper;
+using Application.Orders.Queries;
+using API.Controllers;
+using Application.Orders.Commands;
+using Application.Customers.Queries;
+using Application.Country.Queries;
+using Application.Agencies.Queries;
 
 namespace MoveMoney.API.Controllers
 {
     [Route("api/orders")]
     [ApiController]
-    public class OrdersController : ControllerBase
+    public class OrdersController : BaseApiController
     {
-        private readonly IMoveMoneyRepository _repo;
-        private readonly IMapper _mapper;
-        public OrdersController(IMoveMoneyRepository repo, IMapper mapper)
-        {
-            _mapper = mapper;
-            _repo = repo;
-        }
-
         //Create order process
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> CreateOrder(OrderForCreateDto orderForCreateDto)
         {
-            //This checks if the user processing the order is logged or not.
-            if (orderForCreateDto.UserId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-            {
-                return Unauthorized("You are not loggedin");
-            }
+            var result = await Mediator.Send(new PlaceNewOrderCommand(orderForCreateDto));
 
-            var user = await _repo.GetUser(orderForCreateDto.UserId);
-
-            if (orderForCreateDto.AgencyDestinationId == user.Agency.Id)
-                return BadRequest("You cannot send money to the same Agency.");
-
-            if (orderForCreateDto.RecipientId == orderForCreateDto.SenderId)
-                return BadRequest("Sender and recipient are the same!");
-
-            if (orderForCreateDto.Amount <= 0)
-                return BadRequest("Amount must be higher than 0.");
-
-            var order = _mapper.Map<Order>(orderForCreateDto);
-
-            order.Comission = orderForCreateDto.Comission - order.Amount;
-            order.Status = "Processing";
-            order.Taxes = order.Comission * 0.10;
-            order.Total = order.Amount + order.Taxes + order.Comission;
-            _repo.Add(order);
-
-            var sender = await _repo.GetCustomer(order.SenderId);
-            var recipient = await _repo.GetCustomer(order.RecipientId);
-            var agency = await _repo.GetAgency(order.AgencyDestinationId);
-            if (await _repo.SaveAll())
-            {
-                var orderForReturn = _mapper.Map<OrderForReturnDto>(order);
-
-                orderForReturn.SenderName = sender.FirstName + " " + sender.LastName;
-                orderForReturn.ReceiverName = recipient.FirstName + " " + recipient.LastName;
-                orderForReturn.UserName = user.FirstName + " " + user.LastName;
-                orderForReturn.AgencyDestinationName = agency.AgencyName;
-
-                return CreatedAtRoute(null, orderForReturn);
-            }
-            return BadRequest("Transaction failed.");
+            return HandleResult(result);
         }
-        //This is to get the Comission % in specific, from the amount to transfer, senderCountryId, recipientCountryId
+        
         [HttpGet("comission")]
-        public async Task<IActionResult> GetComission([FromQuery] ComissionToGetDto comissionToGetDto)
+        public async Task<IActionResult> GetComission([FromQuery] GetComissionQuery query)
         {
-            var comission = await _repo.GetComissionValue(comissionToGetDto.Amount, comissionToGetDto.SenderId, comissionToGetDto.RecipientId);
+            var comissionValue = await Mediator.Send(query);
 
-            var comissionAmount = (comission * comissionToGetDto.Amount) + comissionToGetDto.Amount;
-
-            return Ok(comissionAmount);
+            return HandleResult(comissionValue);
         }
+
         [HttpGet("country/{agencyId}")]
         public async Task<IActionResult> GetCountryByAgencyId(int agencyId)
         {
-            var countryId = await _repo.GetCountryIdByAgency(agencyId);
-            if(countryId > 0){
-                return Ok(countryId);
-            }
-            else{
-                return BadRequest("Something went wrong");
-            }
-            
+            var countryId = await Mediator.Send(new GetCountryByAgencyIdQuery { AgencyId = agencyId});
+
+            return HandleResult(countryId);
         }
 
-        //This is to get the autocomplete results "like" for the customer's records
-        [HttpGet("customer/autocomplete")]
-        public async Task<IActionResult> GetCustomerAutoComplete([FromQuery] string names)
-        {
-            var customers = await _repo.GetCustomersAutoComplete(names);
-
-            var customerToReturn = _mapper.Map<IEnumerable<CustomerToReturnDto>>(customers);
-
-            return Ok(customerToReturn);
-        }
-
-        //This is to get the autocomplete results "like" for the customer's records
         [HttpGet("agency/autocomplete")]
         public async Task<IActionResult> GetAgencyAutoComplete([FromQuery] string name)
         {
-            var agencies = await _repo.GetAgencyAutoComplete(name);
+            var agenciesDto = await Mediator.Send(new GetAgencyAutoCompleteQuery { NameLike = name });
 
-            var agencyToReturn = _mapper.Map<IEnumerable<AgencyToReturnDto>>(agencies);
-
-            return Ok(agencyToReturn);
+            return Ok(agenciesDto);
         }
 
         [HttpGet()]
         public async Task<IActionResult> GetOrders()
         {
-            var orders = await _repo.GetOrders();
+            var orders = await Mediator.Send(new GetOrdersQuery());
 
-            var orderForList = _mapper.Map<IEnumerable<OrderForListDto>>(orders);
-
-            return Ok(orderForList);
+            return Ok(orders);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOrder(int id)
         {
-            var order = await _repo.GetOrder(id);
+            var order = await Mediator.Send(new GetOrderQuery { OrderId = id});
 
-            var orderForDetail = _mapper.Map<OrderForDetailDto>(order);
-
-            return Ok(orderForDetail);
+            return HandleResult(order);
         }
 
         // This Task is to change the status of the order from "Processing" to "Ready or "Processed" (depending if it is Pick up or Delivery), at the same time adding the money
@@ -142,40 +78,9 @@ namespace MoveMoney.API.Controllers
         [ServiceFilter(typeof(LogUserActivity))]
         public async Task<IActionResult> ProcessOrder(int userId, int id)
         {
-            //This checks if the user processing the order is logged or not.
-            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-            {
-                return Unauthorized("You are not authorized");
-            }
+            var result = await Mediator.Send(new ProcessOrderCommand { UserId = userId, OrderId = id});
 
-            var order = await _repo.GetOrder(id);
-            var user = await _repo.GetUser(userId);
-
-            if (order.Status == "Processing")
-            {
-                if (order.DeliveryType == "Pick up")
-                {
-                    order.Status = "Ready";
-                }
-                else
-                {
-                    order.Status = "Processed";
-                }
-                
-                user.Money += Convert.ToDecimal(order.Total);
-
-                if (await _repo.SaveAll())
-                {
-                    HttpContext.Items["orderId"] = order.Id;
-                    HttpContext.Items["orderStatus"] = order.Status;
-                    HttpContext.Items["userFullName"] = user.FirstName + " " + user.LastName;
-                    HttpContext.Items["total"] = order.Total;
-                    HttpContext.Items["eventType"] = "Transfer";
-                    HttpContext.Items["agencyId"] = user.AgencyId;
-                    return NoContent();
-                }
-            }
-            return BadRequest("Order cannot be processed");
+            return HandleResult(result);       
         }
     }
 

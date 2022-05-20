@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
-using MoveMoney.API.Models;
 using MoveMoney.API.Data;
 using System.Collections.Generic;
 using AutoMapper;
-using MoveMoney.API.Dtos;
+using Application.Core.Dtos;
 
 namespace MoveMoney.API.Controllers
 {
