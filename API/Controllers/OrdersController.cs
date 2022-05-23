@@ -1,19 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using System;
 using Application.Core.Dtos;
-using MoveMoney.API.Data;
-using System.Collections.Generic;
-using System.Security.Claims;
-using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using MoveMoney.API.Helper;
-using Application.Orders.Queries;
+using Application.Features.Orders.Queries;
 using API.Controllers;
-using Application.Orders.Commands;
-using Application.Customers.Queries;
-using Application.Country.Queries;
-using Application.Agencies.Queries;
+using Application.Features.Orders.Commands;
+using Application.Features.Country.Queries;
+using Application.Features.Agencies.Queries;
 
 namespace MoveMoney.API.Controllers
 {

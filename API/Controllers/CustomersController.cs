@@ -5,15 +5,13 @@ using MoveMoney.API.Helper;
 using MoveMoney.API.Data;
 using System.Collections.Generic;
 using MediatR;
-using Application.Customers.Queries;
+using Application.Features.Customers.Queries;
 using Application.Core;
 using Application.Core.Dtos;
-using Application.Customers.Commands;
+using Application.Features.Customers.Commands;
 
 namespace API.Controllers
-{
-    [Route("api/customers")]
-    [ApiController]
+{ 
     public class CustomersController : BaseApiController
     {
         [HttpGet]
@@ -26,7 +24,7 @@ namespace API.Controllers
             return HandleResult(paginatedCustomers);
         }
 
-        [HttpGet("{id}", Name = "GetCustomer")]
+        [HttpGet("[action]")]
         public async Task<IActionResult> GetCustomer(int id)
         {
             var customer = await Mediator.Send(new GetCustomerQuery { CustomerId = id });
@@ -41,8 +39,8 @@ namespace API.Controllers
 
             return HandleResult(result);
         }
-        
-        [HttpGet("customer/autocomplete")]
+
+        [HttpGet("[action]")]
         public async Task<IActionResult> GetCustomerAutoComplete([FromQuery] string names)
         {
             var customersToReturn = await Mediator.Send(new GetCustomerAutoCompleteQuery { NameLike = names });

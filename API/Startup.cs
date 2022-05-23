@@ -41,9 +41,7 @@ namespace MoveMoney.API
                 opt.SerializerSettings.ReferenceLoopHandling =
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
-            services.AddScoped<IMoveMoneyRepository, MoveMoneyRepository>();
-            services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddAutoMapper(typeof (MoveMoneyRepository).Assembly);
+
             services.AddScoped<LogUserActivity>();
             services.AddInfrastructure(Configuration);
             services.AddApplication();

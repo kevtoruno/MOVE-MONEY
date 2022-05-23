@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Customers.Queries;
+namespace Application.Features.Customers.Queries;
 
 public class GetCustomerQuery : IRequest<Result<CustomerToDetailDto>>
 {

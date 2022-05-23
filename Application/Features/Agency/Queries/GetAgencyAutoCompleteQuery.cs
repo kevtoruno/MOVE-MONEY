@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Agencies.Queries;
+namespace Application.Features.Agencies.Queries;
 
 public class GetAgencyAutoCompleteQuery : IRequest<Result<IEnumerable<AgencyToReturnDto>>>
 {

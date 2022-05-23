@@ -4,7 +4,7 @@ using Application.Core.Interface;
 using AutoMapper;
 using MediatR;
 
-namespace Application.Customers.Queries;
+namespace Application.Features.Customers.Queries;
 
 public class GetCustomerAutoCompleteQuery : IRequest<Result<IEnumerable<CustomerToReturnDto>>>
 {

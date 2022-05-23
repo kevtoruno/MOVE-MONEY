@@ -1,96 +1,35 @@
 using Microsoft.AspNetCore.Mvc;
-using MoveMoney.API.Data;
 using System.Threading.Tasks;
-using MoveMoney.API;
 using System.Security.Claims;
-using System.Text;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Diagnostics;
-using AutoMapper;
 using Application.Core.Dtos;
+using Application.Features.Users.Commands;
 
-namespace MoveMoney.API.Controllers
+namespace API.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class AuthController : BaseApiController
 {
-    [Route("api/[controller]")]
-    [ApiController]
-
-    public class AuthController : ControllerBase
+    [HttpPost("register/{userId}")]
+    public async Task<IActionResult> Register(int userId, UserForRegisterDto userForRegisterDto)
     {
-        private readonly IAuthRepository _repo;
-        private readonly IConfiguration _config;
-        private readonly IMapper _mapper;
-        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
-        {
-            _mapper = mapper;
-            _config = config;
-            _repo = repo;
-        }
+        int userIdFromClaim = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-        [HttpPost("register/{userId}")]
-        public async Task<IActionResult> Register(int userId, UserForRegisterDto userForRegisterDto)
-        {
-            userForRegisterDto.UserName = userForRegisterDto.UserName.ToLower();
-            if(!await _repo.IsAdmin(userId))
-                return Unauthorized("Only admins can create new Users");
+        var result = await Mediator.Send(new RegisterUserCommand 
+        { 
+            UserIdFromClaim = userIdFromClaim, 
+            LoggedInUserId = userId, 
+            UserToRegisterDto = userForRegisterDto 
+        });
 
-            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized();
+        return HandleResult(result);
+    }
 
-            if(await _repo.UserExists(userForRegisterDto.UserName))
-                return BadRequest("Username already exists");
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
+    {
+        var result = await Mediator.Send(new LoginUserCommand { UserForLoginDto = userForLoginDto });
 
-            var userToCreate = _mapper.Map<User>(userForRegisterDto);
-
-            var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
-
-            var userToReturn = _mapper.Map<UserForDetailDto>(createdUser);
-
-            return CreatedAtRoute(null, userToReturn);
-        }
-
-        [HttpPost("login")]
-        public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
-        {
-            var userFromRepo = await _repo.Login(userForLoginDto.UserName.ToLower(), userForLoginDto.Password);
-
-            if(userFromRepo == null)
-                return Unauthorized("Username or password are wrong.");
-            
-            var claims = new []
-            {
-                new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
-                new Claim(ClaimTypes.Name, userFromRepo.UserName),
-                new Claim(ClaimTypes.Role, userFromRepo.UserRole.RoleName)
-            };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8
-            .GetBytes(_config.GetSection("AppSettings:Token").Value));
-
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-
-                Expires = DateTime.Now.AddDays(1),
-                SigningCredentials = creds
-            };
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            var user = _mapper.Map<UserForDetailDto>(userFromRepo);
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            return Ok( new 
-            {
-                token = tokenHandler.WriteToken(token),
-                user
-            });
-        }
+        return HandleResult(result);
     }
 }

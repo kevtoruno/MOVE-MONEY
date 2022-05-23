@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Customers.Commands;
+namespace Application.Features.Customers.Commands;
 
 public class CreateCustomerCommand : IRequest<Result<Unit>>
 {

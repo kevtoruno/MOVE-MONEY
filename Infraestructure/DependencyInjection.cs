@@ -1,4 +1,5 @@
 ﻿using Application.Core.Interface;
+using Infraestructure.Identity;
 using Infraestructure.Persistence;
 using Infraestructure.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -36,6 +37,7 @@ namespace Infraestructure
 
             services.AddScoped<IMoveMoneyRepository, MoveMoneyRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IJwtTokenCreator, JwtTokenCreator>();
 
             return services;
         }

@@ -27,6 +27,8 @@ public abstract class BaseApiController : ControllerBase
 
         if (result.IsNoContent == true) return NoContent();
 
+        if (result.IsUnauthorized == true) return Unauthorized(result.ErrorMessage);
+
         return BadRequest(result.ErrorMessage);
     }
 }

@@ -18,6 +18,8 @@ namespace Application.Core
         public string RouteName { get; set; } = "";
         public bool ResourceCreated { get; set; }
 
+        public bool IsUnauthorized { get; set; }
+
         public static Result<T> Success(T value) => new Result<T> { IsSucess = true, Value = value };
 
         public static Result<T> NoContent() => new Result<T> { IsNoContent = true };
@@ -27,5 +29,7 @@ namespace Application.Core
         public static Result<T> ResultNotFound(string errorMessage) => new Result<T> { IsSucess = false, ErrorMessage = errorMessage, NotFound = true };
         public static Result<T> RedirectTo(string urlToRedirectTo) => new Result<T> { IsRedirected = true, UrlToRedirectTo = urlToRedirectTo };
         public static Result<T> CreatedAtRoute(T value, string routeName = "") => new Result<T> { ResourceCreated = true, Value = value, RouteName = routeName };
+
+        public static Result<T> Unauthorized(string errorMessage) => new Result<T> { IsUnauthorized = true, ErrorMessage = errorMessage };
     }
 }

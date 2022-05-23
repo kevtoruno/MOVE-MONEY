@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Orders.Queries;
+namespace Application.Features.Orders.Queries;
 
 public class GetComissionQuery : IRequest<Result<double>>
 {

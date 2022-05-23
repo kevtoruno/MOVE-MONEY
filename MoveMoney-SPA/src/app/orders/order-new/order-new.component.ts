@@ -66,7 +66,9 @@ export class OrderNewComponent implements OnInit {
       debounceTime(300),
       switchMap(value => {
         if (value !== '') {
-          return this.lookupCustomer(value);
+          var customer = this.lookupCustomer(value);
+          console.log(customer);
+          return customer;
         } else {
           return of(null);
         }

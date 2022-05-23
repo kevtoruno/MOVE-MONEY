@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Customers.Queries;
+namespace Application.Features.Customers.Queries;
 
 public class GetCustomersPaginatedQuery : IRequest<Result<PagedList<Customer>>>
 {

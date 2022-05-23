@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Orders.Commands;
+namespace Application.Features.Orders.Commands;
 
 public class PlaceNewOrderCommandValidor : AbstractValidator<PlaceNewOrderCommand>
 {

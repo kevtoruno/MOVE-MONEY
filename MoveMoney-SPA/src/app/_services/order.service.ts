@@ -19,7 +19,7 @@ export class OrderService {
   constructor(private http: HttpClient) { }
 
   getCustomersAC(names: string): Observable<CustomerParams> {
-    return this.http.get<CustomerParams>(`${this.baseUrl}orders/customer/autocomplete`, {
+    return this.http.get<CustomerParams>(`${this.baseUrl}customers/GetCustomerAutoComplete`, {
       observe: 'response',
       params: {
         names: names

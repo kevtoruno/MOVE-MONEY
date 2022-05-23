@@ -1,43 +1,28 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using System;
-using MoveMoney.API.Data;
-using System.Collections.Generic;
-using AutoMapper;
 using Application.Core.Dtos;
+using Application.Features.Users.Queries;
 
-namespace MoveMoney.API.Controllers
+namespace API.Controllers
 {
     [Route("api/users")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UsersController : BaseApiController
     {
-        private readonly IMoveMoneyRepository _repo;
-        private readonly IMapper _mapper;
-        public UsersController(IMoveMoneyRepository repo, IMapper mapper)
-        {
-            _mapper = mapper;
-            _repo = repo;
-        }
-
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
-            var users = await _repo.GetUsers();
+            var users = await Mediator.Send(new GetUsersQuery ());
 
-            var usersToReturn = _mapper.Map<IEnumerable<UserForDetailDto>>(users);
-
-            return Ok(usersToReturn);
+            return HandleResult(users);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(int id)
         {
-            var user = await _repo.GetUser(id);
+            var user = await Mediator.Send(new GetUserQuery { UserId = id });
 
-            var userToReturn = _mapper.Map<UserForDetailDto>(user);
-
-            return Ok(userToReturn);
+            return HandleResult(user);
         }
     }
 }

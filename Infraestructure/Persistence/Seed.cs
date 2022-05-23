@@ -1,7 +1,8 @@
+using Domain.Entities;
+using Infraestructure.Persistence;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
-using MoveMoney.API.Models;
-using Newtonsoft.Json;
 
 namespace MoveMoney.API.Data
 {
@@ -127,25 +128,13 @@ namespace MoveMoney.API.Data
 
                 foreach (var user in users)
                 {
-                    byte[] passwordHash, passwordSalt;
-                    CreatePasswordHash("password", out passwordHash, out passwordSalt);
-
-                    user.PasswordHash = passwordHash;
-                    user.PasswordSalt = passwordSalt;
+                    user.SetPassword("password");
                     user.UserName = user.UserName.ToLower();
                     context.Add(user);
                 }
 
                 context.SaveChanges();
             }
-        }
-        private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
-        {
-            using (var hmac = new System.Security.Cryptography.HMACSHA512())
-            {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-            }    
         }
     }
 }

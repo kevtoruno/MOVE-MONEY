@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Country.Queries;
+namespace Application.Features.Country.Queries;
 public class GetCountryByAgencyIdQuery: IRequest<Result<int>>
 {
     public int AgencyId { get; set; }

@@ -10,7 +10,7 @@ using AutoMapper;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Orders.Commands;
+namespace Application.Features.Orders.Commands;
 
 public class ProcessOrderCommand :IRequest<Result<Unit>>
 {
