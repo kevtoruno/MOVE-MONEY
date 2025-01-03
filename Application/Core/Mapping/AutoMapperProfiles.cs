@@ -29,6 +29,8 @@ namespace Application.Core.Mapping
             CreateMap<Order, OrderForReturnDto>();
             CreateMap<Customer, CustomerToReturnDto>();
             CreateMap<Agency, AgencyToReturnDto>();
+            CreateMap<CustomerToCreateDto, Customer>();
+            CreateMap<Customer, CustomerToCreateDto>();
 
             CreateMap<Order, OrderForListDto>()
                 .ForMember(dest => dest.SenderName,

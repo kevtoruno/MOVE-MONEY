@@ -54,7 +54,7 @@ export class OrderService {
     params = params.append('senderId', senderId);
     params = params.append('recipientId', recipientId);
     params = params.append('amount', amount);
-    return this.http.get<number>(`${this.baseUrl}orders/comission?senderId=${senderId}&recipientId=${recipientId
+    return this.http.get<number>(`${this.baseUrl}orders/comission?countrySenderId=${senderId}&countryRecipientId=${recipientId
       }&amount=${amount}`);
   }
 

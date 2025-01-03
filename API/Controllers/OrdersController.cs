@@ -25,6 +25,16 @@ namespace MoveMoney.API.Controllers
             return HandleResult(result);
         }
         
+        [Authorize]
+        [HttpPost("{userId}/{id}")]
+        [ServiceFilter(typeof(LogUserActivity))]
+        public async Task<IActionResult> ProcessOrder(int userId, int id)
+        {
+            var result = await Mediator.Send(new ProcessOrderCommand { UserId = userId, OrderId = id});
+
+            return HandleResult(result);       
+        }
+
         [HttpGet("comission")]
         public async Task<IActionResult> GetComission([FromQuery] GetComissionQuery query)
         {
@@ -46,7 +56,7 @@ namespace MoveMoney.API.Controllers
         {
             var agenciesDto = await Mediator.Send(new GetAgencyAutoCompleteQuery { NameLike = name });
 
-            return Ok(agenciesDto);
+            return HandleResult(agenciesDto);
         }
 
         [HttpGet()]
@@ -54,7 +64,7 @@ namespace MoveMoney.API.Controllers
         {
             var orders = await Mediator.Send(new GetOrdersQuery());
 
-            return Ok(orders);
+            return HandleResult(orders);
         }
 
         [HttpGet("{id}")]
@@ -63,18 +73,6 @@ namespace MoveMoney.API.Controllers
             var order = await Mediator.Send(new GetOrderQuery { OrderId = id});
 
             return HandleResult(order);
-        }
-
-        // This Task is to change the status of the order from "Processing" to "Ready or "Processed" (depending if it is Pick up or Delivery), at the same time adding the money
-        // to the User that processed this order
-        [Authorize]
-        [HttpPost("{userId}/{id}")]
-        [ServiceFilter(typeof(LogUserActivity))]
-        public async Task<IActionResult> ProcessOrder(int userId, int id)
-        {
-            var result = await Mediator.Send(new ProcessOrderCommand { UserId = userId, OrderId = id});
-
-            return HandleResult(result);       
         }
     }
 

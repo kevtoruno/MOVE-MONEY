@@ -22,13 +22,11 @@ public class ProcessOrderCommand :IRequest<Result<Unit>>
 public class ProcessOrderHandler: IRequestHandler<ProcessOrderCommand, Result<Unit>>
 {
     private readonly IMoveMoneyRepository _repo;
-    private readonly IMapper _mapper;
     private readonly IDataContext _context;
 
     public ProcessOrderHandler(IMoveMoneyRepository repo, IMapper mapper, IDataContext context)
     {
         _repo = repo;
-        _mapper = mapper;
         _context = context;
     }
 
@@ -42,6 +40,11 @@ public class ProcessOrderHandler: IRequestHandler<ProcessOrderCommand, Result<Un
         if (orderProcessed)
         {
             user.AddMoney(order.Total);
+
+            _context.Orders.Update(order);
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+
             return Result<Unit>.NoContent();
         }
 

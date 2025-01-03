@@ -17,7 +17,6 @@ namespace Infraestructure.Repository
 
         }
 
-        //Customer Functions
         public async Task<Customer> GetCustomer(int id)
         {
             var customer = await _context.Customers

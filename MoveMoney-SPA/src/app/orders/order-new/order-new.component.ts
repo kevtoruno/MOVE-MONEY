@@ -53,7 +53,8 @@ export class OrderNewComponent implements OnInit {
       debounceTime(300),
       switchMap(value => {
         if (value !== '') {
-          return this.lookupCustomer(value);
+          var filteredSenderResult = this.lookupCustomer(value);
+          return filteredSenderResult;
         } else {
           return of(null);
         }
@@ -66,9 +67,8 @@ export class OrderNewComponent implements OnInit {
       debounceTime(300),
       switchMap(value => {
         if (value !== '') {
-          var customer = this.lookupCustomer(value);
-          console.log(customer);
-          return customer;
+          var filteredReceiverResult = this.lookupCustomer(value);
+          return filteredReceiverResult;
         } else {
           return of(null);
         }

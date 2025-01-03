@@ -1,3 +1,4 @@
+using Domain.Core.Enums;
 using System;
 
 namespace Domain.Entities
@@ -17,9 +18,9 @@ namespace Domain.Entities
         //public Int64 OrderId { get; set; }
         public DateTime Created { get; set; }
         public bool IsClosed { get; set; }
-        public string DeliveryType { get; set; } //Pickup or Delivery
-        public string Status { get; set; } //Processing, Processed, Ready, On Delivery, Completed
-        public double Comission { get; set; }
+        public OrderDeliveryType DeliveryType { get; set; }
+        public OrderStatus Status { get; private set; }
+        public double Comission { get; private set; }
         public double Amount { get; set; }
         public double Taxes { get; set; }
         public double Total { get; set; }
@@ -32,7 +33,7 @@ namespace Domain.Entities
 
         public void InitializeProcessingOrder(double comission)
         {
-            Status = "Processing";
+            Status = OrderStatus.Processing;
             Comission = comission;   
             Taxes = Comission * 0.10;
             Total = Amount + Taxes + Comission;
@@ -42,7 +43,7 @@ namespace Domain.Entities
         {
             bool orderProcessed = false;
 
-            if (Status == "Processing")
+            if (Status == OrderStatus.Processing)
             {
                 orderProcessed = true;
 
@@ -54,13 +55,13 @@ namespace Domain.Entities
 
         private void SetStatusBasedOnDeliveryType()
         {
-            if (DeliveryType == "Pick up")
+            if (DeliveryType == OrderDeliveryType.Pickup)
             {
-                Status = "Ready";
+                Status = OrderStatus.Ready;
             }
             else
             {
-                Status = "Processed";
+                Status = OrderStatus.Processed;
             }
         }
     }

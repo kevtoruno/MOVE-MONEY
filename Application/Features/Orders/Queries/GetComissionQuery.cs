@@ -26,9 +26,11 @@ public class GetComissionHandler : IRequestHandler<GetComissionQuery, Result<dou
     
     public async Task<Result<double>> Handle(GetComissionQuery request, CancellationToken cancellationToken)
     {
+        double comissionResult = 0;
         var comission = await _repo.GetComissionPerSenderAndCountry(request.CountrySenderId, request.CountryRecipientId);
 
-        var comissionResult = comission.CalcComissionPerValue(request.Amount);
+        if (comission != null)
+            comissionResult = comission.CalcComissionPerValue(request.Amount); 
 
         return Result<double>.Success(comissionResult);
     }

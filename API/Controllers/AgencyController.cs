@@ -14,9 +14,10 @@ namespace MoveMoney.API.Controllers
     [Route("api/agencies")]
     public class AgencyController : BaseApiController
     {
-        public AgencyController()
+        public async Task<IActionResult> GetAgency(int agencyId)
         {
-
+            
+            return Ok();
         }
     }
 }

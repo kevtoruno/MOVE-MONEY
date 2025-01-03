@@ -45,7 +45,7 @@ namespace API.Controllers
         {
             var customersToReturn = await Mediator.Send(new GetCustomerAutoCompleteQuery { NameLike = names });
 
-            return Ok(customersToReturn);
+            return HandleResult(customersToReturn);
         }
     }
 }

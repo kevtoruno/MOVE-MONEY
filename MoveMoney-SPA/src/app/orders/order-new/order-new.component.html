@@ -68,7 +68,7 @@
                         <input matInput type="number" [formControl] = "comissionControl" placeholder="Amount to transfer">
                         <mat-error *ngIf="hasError('amount', 'required')">Amount is required.</mat-error>
                         <mat-hint *ngIf="amountComission" class="comissionValue">
-                          ${{amountComission}}
+                          Comission: ${{amountComission}}
                         </mat-hint>
                       </mat-form-field>
                       

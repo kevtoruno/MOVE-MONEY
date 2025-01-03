@@ -3,6 +3,9 @@ using System;
 using Infraestructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+
+#nullable disable
 
 namespace MoveMoney.API.Migrations
 {
@@ -12,22 +15,24 @@ namespace MoveMoney.API.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.4");
+            modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
 
-            modelBuilder.Entity("MoveMoney.API.Models.Agency", b =>
+            modelBuilder.Entity("Domain.Entities.Agency", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("AgencyName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("AgencyType")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("City")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("CountryId")
@@ -43,7 +48,7 @@ namespace MoveMoney.API.Migrations
                     b.ToTable("Agency");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.ClosingCashAgent", b =>
+            modelBuilder.Entity("Domain.Entities.ClosingCashAgent", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -70,7 +75,7 @@ namespace MoveMoney.API.Migrations
                     b.ToTable("ClosingCashAgents");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.ClosingCashAgentDetail", b =>
+            modelBuilder.Entity("Domain.Entities.ClosingCashAgentDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -92,7 +97,7 @@ namespace MoveMoney.API.Migrations
                     b.ToTable("ClosingCashAgentDetail");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.ClosingCashManager", b =>
+            modelBuilder.Entity("Domain.Entities.ClosingCashManager", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -125,7 +130,7 @@ namespace MoveMoney.API.Migrations
                     b.ToTable("ClosingCashManagers");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.ClosingCashManangerDetail", b =>
+            modelBuilder.Entity("Domain.Entities.ClosingCashManangerDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -147,7 +152,7 @@ namespace MoveMoney.API.Migrations
                     b.ToTable("ClosingCashManangerDetails");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.Comission", b =>
+            modelBuilder.Entity("Domain.Entities.Comission", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -168,7 +173,7 @@ namespace MoveMoney.API.Migrations
                     b.ToTable("Comissions");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.ComissionRange", b =>
+            modelBuilder.Entity("Domain.Entities.ComissionRange", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -193,13 +198,14 @@ namespace MoveMoney.API.Migrations
                     b.ToTable("ComissionRanges");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.Country", b =>
+            modelBuilder.Entity("Domain.Entities.Country", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("CountryName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -207,19 +213,22 @@ namespace MoveMoney.API.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.Customer", b =>
+            modelBuilder.Entity("Domain.Entities.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("City")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Country")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Created")
@@ -229,15 +238,19 @@ namespace MoveMoney.API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Identification")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("TypeIdentificationID")
@@ -250,7 +263,7 @@ namespace MoveMoney.API.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.Order", b =>
+            modelBuilder.Entity("Domain.Entities.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -268,8 +281,8 @@ namespace MoveMoney.API.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("DeliveryType")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("DeliveryType")
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsClosed")
                         .HasColumnType("INTEGER");
@@ -280,8 +293,8 @@ namespace MoveMoney.API.Migrations
                     b.Property<int>("SenderId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
 
                     b.Property<double>("Taxes")
                         .HasColumnType("REAL");
@@ -305,13 +318,14 @@ namespace MoveMoney.API.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.TypeIdentification", b =>
+            modelBuilder.Entity("Domain.Entities.TypeIdentification", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -319,7 +333,7 @@ namespace MoveMoney.API.Migrations
                     b.ToTable("TypeIdentifications");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.User", b =>
+            modelBuilder.Entity("Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -335,27 +349,32 @@ namespace MoveMoney.API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("Money")
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
                         .HasColumnType("BLOB");
 
                     b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
                         .HasColumnType("BLOB");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("UserRoleId")
@@ -370,7 +389,7 @@ namespace MoveMoney.API.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.UserLogs", b =>
+            modelBuilder.Entity("Domain.Entities.UserLogs", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -386,9 +405,11 @@ namespace MoveMoney.API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("EventType")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("UserId")
@@ -403,13 +424,14 @@ namespace MoveMoney.API.Migrations
                     b.ToTable("UserLogs");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.UserRole", b =>
+            modelBuilder.Entity("Domain.Entities.UserRole", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("RoleName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -417,162 +439,221 @@ namespace MoveMoney.API.Migrations
                     b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.Agency", b =>
+            modelBuilder.Entity("Domain.Entities.Agency", b =>
                 {
-                    b.HasOne("MoveMoney.API.Models.Country", "Country")
+                    b.HasOne("Domain.Entities.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Country");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.ClosingCashAgent", b =>
+            modelBuilder.Entity("Domain.Entities.ClosingCashAgent", b =>
                 {
-                    b.HasOne("MoveMoney.API.Models.User", "Recipient")
+                    b.HasOne("Domain.Entities.User", "Recipient")
                         .WithMany()
                         .HasForeignKey("RecipientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MoveMoney.API.Models.User", "Sender")
+                    b.HasOne("Domain.Entities.User", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Recipient");
+
+                    b.Navigation("Sender");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.ClosingCashAgentDetail", b =>
+            modelBuilder.Entity("Domain.Entities.ClosingCashAgentDetail", b =>
                 {
-                    b.HasOne("MoveMoney.API.Models.ClosingCashAgent", "ClosingCashAgentMaster")
+                    b.HasOne("Domain.Entities.ClosingCashAgent", "ClosingCashAgentMaster")
                         .WithMany()
                         .HasForeignKey("ClosingCashAgentMasterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MoveMoney.API.Models.Order", "Order")
+                    b.HasOne("Domain.Entities.Order", "Order")
                         .WithOne("ClosingCashAgentDetail")
-                        .HasForeignKey("MoveMoney.API.Models.ClosingCashAgentDetail", "OrderId")
+                        .HasForeignKey("Domain.Entities.ClosingCashAgentDetail", "OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ClosingCashAgentMaster");
+
+                    b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.ClosingCashManager", b =>
+            modelBuilder.Entity("Domain.Entities.ClosingCashManager", b =>
                 {
-                    b.HasOne("MoveMoney.API.Models.Agency", "Agency")
+                    b.HasOne("Domain.Entities.Agency", "Agency")
                         .WithMany()
                         .HasForeignKey("AgencyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MoveMoney.API.Models.User", "Closer")
+                    b.HasOne("Domain.Entities.User", "Closer")
                         .WithMany()
                         .HasForeignKey("CloserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Agency");
+
+                    b.Navigation("Closer");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.ClosingCashManangerDetail", b =>
+            modelBuilder.Entity("Domain.Entities.ClosingCashManangerDetail", b =>
                 {
-                    b.HasOne("MoveMoney.API.Models.ClosingCashAgent", "ClosingCashAgent")
+                    b.HasOne("Domain.Entities.ClosingCashAgent", "ClosingCashAgent")
                         .WithOne("ClosingCashManangerDetail")
-                        .HasForeignKey("MoveMoney.API.Models.ClosingCashManangerDetail", "ClosingCashAgentId")
+                        .HasForeignKey("Domain.Entities.ClosingCashManangerDetail", "ClosingCashAgentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MoveMoney.API.Models.ClosingCashManager", "ClosingCashMaster")
+                    b.HasOne("Domain.Entities.ClosingCashManager", "ClosingCashMaster")
                         .WithMany()
                         .HasForeignKey("ClosingCashMasterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ClosingCashAgent");
+
+                    b.Navigation("ClosingCashMaster");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.Comission", b =>
+            modelBuilder.Entity("Domain.Entities.Comission", b =>
                 {
-                    b.HasOne("MoveMoney.API.Models.Country", "CountryReceiver")
+                    b.HasOne("Domain.Entities.Country", "CountryReceiver")
                         .WithMany()
                         .HasForeignKey("CountryReceiverId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MoveMoney.API.Models.Country", "CountrySender")
+                    b.HasOne("Domain.Entities.Country", "CountrySender")
                         .WithMany()
                         .HasForeignKey("CountrySenderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CountryReceiver");
+
+                    b.Navigation("CountrySender");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.ComissionRange", b =>
+            modelBuilder.Entity("Domain.Entities.ComissionRange", b =>
                 {
-                    b.HasOne("MoveMoney.API.Models.Comission", "Comission")
+                    b.HasOne("Domain.Entities.Comission", "Comission")
                         .WithMany("ComissionRange")
                         .HasForeignKey("ComissionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Comission");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.Customer", b =>
+            modelBuilder.Entity("Domain.Entities.Customer", b =>
                 {
-                    b.HasOne("MoveMoney.API.Models.TypeIdentification", "TypeIdentification")
+                    b.HasOne("Domain.Entities.TypeIdentification", "TypeIdentification")
                         .WithMany()
                         .HasForeignKey("TypeIdentificationID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("TypeIdentification");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.Order", b =>
+            modelBuilder.Entity("Domain.Entities.Order", b =>
                 {
-                    b.HasOne("MoveMoney.API.Models.Agency", "AgencyDestination")
+                    b.HasOne("Domain.Entities.Agency", "AgencyDestination")
                         .WithMany()
                         .HasForeignKey("AgencyDestinationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MoveMoney.API.Models.Customer", "Recipient")
+                    b.HasOne("Domain.Entities.Customer", "Recipient")
                         .WithMany()
                         .HasForeignKey("RecipientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MoveMoney.API.Models.Customer", "Sender")
+                    b.HasOne("Domain.Entities.Customer", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MoveMoney.API.Models.User", "User")
+                    b.HasOne("Domain.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("AgencyDestination");
+
+                    b.Navigation("Recipient");
+
+                    b.Navigation("Sender");
+
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.User", b =>
+            modelBuilder.Entity("Domain.Entities.User", b =>
                 {
-                    b.HasOne("MoveMoney.API.Models.Agency", "Agency")
+                    b.HasOne("Domain.Entities.Agency", "Agency")
                         .WithMany()
                         .HasForeignKey("AgencyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MoveMoney.API.Models.UserRole", "UserRole")
+                    b.HasOne("Domain.Entities.UserRole", "UserRole")
                         .WithMany()
                         .HasForeignKey("UserRoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Agency");
+
+                    b.Navigation("UserRole");
                 });
 
-            modelBuilder.Entity("MoveMoney.API.Models.UserLogs", b =>
+            modelBuilder.Entity("Domain.Entities.UserLogs", b =>
                 {
-                    b.HasOne("MoveMoney.API.Models.Agency", "Agency")
+                    b.HasOne("Domain.Entities.Agency", "Agency")
                         .WithMany()
                         .HasForeignKey("AgencyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MoveMoney.API.Models.User", "User")
+                    b.HasOne("Domain.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Agency");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Entities.ClosingCashAgent", b =>
+                {
+                    b.Navigation("ClosingCashManangerDetail")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.Comission", b =>
+                {
+                    b.Navigation("ComissionRange");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Order", b =>
+                {
+                    b.Navigation("ClosingCashAgentDetail")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

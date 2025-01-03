@@ -27,6 +27,7 @@ public class PlaceNewOrderHandler : IRequestHandler<PlaceNewOrderCommand, Result
     private readonly IMoveMoneyRepository _repo;
     private readonly IMapper _mapper;
     private readonly IDataContext _context;
+
     public PlaceNewOrderHandler(IMoveMoneyRepository repo, IMapper mapper, IDataContext context)
     {
         _repo = repo;
