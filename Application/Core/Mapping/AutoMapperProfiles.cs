@@ -22,7 +22,9 @@ namespace Application.Core.Mapping
                 .ForMember(dest => dest.AgencyCountryId,
                 opt => opt.MapFrom(src => src.Agency.CountryId));
 
-            CreateMap<OrderForCreateDto, Order>();
+            CreateMap<OrderForCreateDto, Order>()
+                .ForMember(dest => dest.DeliveryType,
+                    opt => opt.MapFrom(src => src.DeliveryType == "Pick up" ? 0 : 1));
 
             CreateMap<User, UserForRegisterDto>();
             CreateMap<UserForRegisterDto, User>();
